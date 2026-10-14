@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Momentum5.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Momentum5.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
