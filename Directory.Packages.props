@@ -1,12 +1,14 @@
 <Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.29648.1000-preview" />
-		<PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.5.4-experimental" />
-		<PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.11.0" />
-		<PackageVersion Include="System.CommandLine" Version="3.0.0-rc.2.26504.105" />
-		<PackageVersion Include="xunit.v3" Version="4.0.2" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.29648.1000-preview" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="H.NotifyIcon.WinUI" Version="2.5.0-dev.2" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.5.4-experimental" />
+    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.11.0" />
+    <PackageVersion Include="System.CommandLine" Version="3.0.0-rc.2.26504.105" />
+    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+  </ItemGroup>
 </Project>

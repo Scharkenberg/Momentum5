@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Momentum5.Client\Momentum5.Client.csproj" />
     <ProjectReference Include="..\Momentum5.Simulation\Momentum5.Simulation.csproj" />
     <ProjectReference Include="..\Momentum5.Transport.Rfcomm\Momentum5.Transport.Rfcomm.csproj" />
+    <ProjectReference Include="..\Momentum5.Transport.Ble\Momentum5.Transport.Ble.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,65 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 11.0.x
+          dotnet-quality: preview
+
+      - run: dotnet --info
+
+      - name: MSIX x64 (packaged, framework-dependent, unsigned)
+        run: dotnet build Momentum5.App/Momentum5.App.csproj -c Release -p:Platform=x64 -p:GenerateAppxPackageOnBuild=true -p:AppxPackageDir=../publish/msix/x64 -p:AppxBundle=Never -p:AppxPackageSigningEnabled=false
+
+      - name: MSIX arm64 (packaged, framework-dependent, unsigned)
+        run: dotnet build Momentum5.App/Momentum5.App.csproj -c Release -p:Platform=ARM64 -p:GenerateAppxPackageOnBuild=true -p:AppxPackageDir=../publish/msix/arm64 -p:AppxBundle=Never -p:AppxPackageSigningEnabled=false
+
+      - name: Portable win-x64 (publish profile win-x64)
+        run: dotnet publish Momentum5.App/Momentum5.App.csproj -c Release --no-incremental -p:PublishProfile=win-x64
+
+      - name: m5ctl win-x64 (self-contained)
+        run: dotnet publish Momentum5.Cli/Momentum5.Cli.csproj -c Release -r win-x64 --self-contained -o publish/win-x64/m5ctl
+
+      - name: Portable win-arm64 (publish profile win-arm64)
+        run: dotnet publish Momentum5.App/Momentum5.App.csproj -c Release --no-incremental -p:PublishProfile=win-arm64
+
+      - name: m5ctl win-arm64 (self-contained)
+        run: dotnet publish Momentum5.Cli/Momentum5.Cli.csproj -c Release -r win-arm64 --self-contained -o publish/win-arm64/m5ctl
+
+      - name: Collect release artifacts
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Compress-Archive -Path publish/win-x64/* -DestinationPath "dist/Momentum5_${{ github.ref_name }}_win-x64_portable.zip"
+          Compress-Archive -Path publish/win-arm64/* -DestinationPath "dist/Momentum5_${{ github.ref_name }}_win-arm64_portable.zip"
+          Get-ChildItem -Recurse publish/msix -Filter *.msix | Copy-Item -Destination dist
+
+      - name: Upload artifacts to the workflow run
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: dist
+          if-no-files-found: error
+
+      - name: Create the GitHub release and attach artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          gh release view $tag 2> $null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --title $tag --generate-notes --verify-tag
+          }
+          gh release upload $tag (Get-ChildItem dist -File).FullName --clobber

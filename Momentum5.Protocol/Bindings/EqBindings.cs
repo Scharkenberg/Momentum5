@@ -20,6 +20,11 @@ public static class EqBindings
 	private static readonly IPayloadFormat<int> FreqFormat =
 		PayloadFormat.Create<int>(DecodeFreq, EncodeFreq);
 
+	// X-04: 100D/100F payload semantics are UNVERIFIED (ref/01 status U) — only the raw first byte is
+	// exposed, no interpretation (e.g. sbyte/10 for Q) until R-04/R-05 confirm the shape; no SET exists.
+	private static readonly IPayloadFormat<int> RawByteFormat =
+		PayloadFormat.Create<int>(DecodeRawByte, EncodeRawByte);
+
 	private static readonly IPayloadFormat<SoundMode> SoundModeFormat =
 		PayloadFormat.Create<SoundMode>(DecodeSoundMode, EncodeSoundMode);
 
@@ -42,6 +47,12 @@ public static class EqBindings
 		Bind.Create(
 			Keys.EqBandFreq(0), SettingGroup.Eq, 0x100B, null, FreqFormat, indexed: true,
 			errorMapper: MapBandError, samples: [90, 325, 1500, 2500, 4500, 8000, 13000, 16000]),
+		Bind.Create(
+			Keys.EqBandQ(0), SettingGroup.Eq, 0x100D, null, RawByteFormat, indexed: true,
+			errorMapper: MapBandError, samples: [4, 7, 10]),
+		Bind.Create(
+			Keys.EqBandFilterType(0), SettingGroup.Eq, 0x100F, null, RawByteFormat, indexed: true,
+			errorMapper: MapBandError, samples: [0, 1, 3]),
 		Bind.Create(Keys.BassBoost, SettingGroup.Eq, 0x1009, 0x1008, Codecs.Bool, samples: [false, true]),
 		Bind.Create(
 			Keys.SoundMode, SettingGroup.Sound, 0x0804, 0x0803, SoundModeFormat, setFormat: SoundModeSetFormat,
@@ -158,6 +169,34 @@ public static class EqBindings
 		}
 
 		payload = [(byte)index, (byte)(value >> 8), (byte)(value & 0xFF)];
+		error = null;
+		return true;
+	}
+
+	// UNVERIFIED payload: one byte → the value; two or more → the first byte (kept raw, page labels it "raw").
+	private static bool DecodeRawByte(ReadOnlySpan<byte> payload, int index, out int value)
+	{
+		if (payload.Length >= 1)
+		{
+			value = payload[0];
+			return true;
+		}
+
+		value = 0;
+		return false;
+	}
+
+	// No SET command exists for 100D/100F; encoding only serves the fake device's response path.
+	private static bool EncodeRawByte(int value, int index, out byte[] payload, out string? error)
+	{
+		if (value is < byte.MinValue or > byte.MaxValue)
+		{
+			payload = [];
+			error = "Raw byte out of range.";
+			return false;
+		}
+
+		payload = [(byte)value];
 		error = null;
 		return true;
 	}

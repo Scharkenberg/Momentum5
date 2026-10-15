@@ -15,4 +15,16 @@ public static partial class Keys
 
 	/// <summary>Centre frequency in Hz of band <paramref name="index"/>.</summary>
 	public static SettingKey<int> EqBandFreq(int index) => new(nameof(EqBandFreq), index);
+
+	/// <summary>
+	/// Raw Q byte of band <paramref name="index"/> (GET 100D). Payload semantics are unverified
+	/// (ref/01 status U) — the raw byte is exposed without interpretation; no SET exists.
+	/// </summary>
+	public static SettingKey<int> EqBandQ(int index) => new(nameof(EqBandQ), index);
+
+	/// <summary>
+	/// Raw filter-type byte of band <paramref name="index"/> (GET 100F). Payload semantics are
+	/// unverified (ref/01 status U) — the raw byte is exposed without interpretation; no SET exists.
+	/// </summary>
+	public static SettingKey<int> EqBandFilterType(int index) => new(nameof(EqBandFilterType), index);
 }

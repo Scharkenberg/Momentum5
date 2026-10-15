@@ -1,0 +1,623 @@
+{
+  "Target": "66:C6:71:65:36:F0",
+  "StartedAt": "2026-10-15T06:13:02.0803376+02:00",
+  "DurationMs": 40809,
+  "Steps": [
+    {
+      "Name": "open device",
+      "Status": 0,
+      "Detail": "Joe\u0027s Vibe Cans 66:C6:71:65:36:F0 paired=True link=up",
+      "Ms": 179
+    },
+    {
+      "Name": "discover (uncached, connects)",
+      "Status": 2,
+      "Detail": "The operation has timed out.",
+      "Ms": 30006
+    },
+    {
+      "Name": "discover (cached fallback)",
+      "Status": 1,
+      "Detail": "8 services from the Windows cache (live discovery failed: device likely not connectable over LE right now)",
+      "Ms": 214
+    },
+    {
+      "Name": "discover (cached) consistency",
+      "Status": 0,
+      "Detail": "8 services cached vs 8 live",
+      "Ms": 133
+    },
+    {
+      "Name": "service 1800 Generic Access (0x1800)",
+      "Status": 0,
+      "Detail": "present",
+      "Ms": 0
+    },
+    {
+      "Name": "service 180A Device Information (0x180A)",
+      "Status": 0,
+      "Detail": "present",
+      "Ms": 0
+    },
+    {
+      "Name": "service 180F Battery (0x180F)",
+      "Status": 0,
+      "Detail": "present",
+      "Ms": 0
+    },
+    {
+      "Name": "GAIA GATT service",
+      "Status": 4,
+      "Detail": "absent",
+      "Ms": 0
+    },
+    {
+      "Name": "service Generic Attribute (0x1801)",
+      "Status": 4,
+      "Detail": "2A05[Indicate]; 2B29[Read, Write]; 2B2A[Read]; 2B3A[Read]",
+      "Ms": 0
+    },
+    {
+      "Name": "service Generic Access (0x1800)",
+      "Status": 4,
+      "Detail": "2A00[Read]; 2A01[Read]",
+      "Ms": 0
+    },
+    {
+      "Name": "service 0xFCFE (member UUID, vendor channel 6333133b-...) (0xFCFE)",
+      "Status": 4,
+      "Detail": "6333133b[Write]; 6333133c[Read, Notify]; 6333133d[Read, WriteWithoutResponse, Notify]; 63331379[Read, Write, Notify]",
+      "Ms": 0
+    },
+    {
+      "Name": "service Device Information (0x180A)",
+      "Status": 4,
+      "Detail": "2A29[Read]; 2A24[Read]; 2A25[Read]; 2A27[Read]; 2A26[Read]; 2A28[Read]; 2A23[Read]; 2A2A[Read]; 2A50[Read]",
+      "Ms": 0
+    },
+    {
+      "Name": "service 0000eb10-d102-11e1-9b23-00025b00a5a5",
+      "Status": 4,
+      "Detail": "0000eb11[Read]; 0000eb12[Read]; 0000eb13[Write, Indicate]; 0000eb14[Write]",
+      "Ms": 0
+    },
+    {
+      "Name": "service 0xFD92 (Qualcomm member UUID; eb20-eb22 vendor channel) (0xFD92)",
+      "Status": 4,
+      "Detail": "0000eb20[Read, Notify]; 0000eb21[Write]; 0000eb22[Read, Notify]",
+      "Ms": 0
+    },
+    {
+      "Name": "service Google Fast Pair (0xFE2C)",
+      "Status": 4,
+      "Detail": "fe2c1233[Read]; fe2c1234[Write, Indicate]; fe2c1235[Write, Indicate]; fe2c1236[Write]; fe2c1237[Write, Indicate]; fe2c1238[Read, Write, Notify]",
+      "Ms": 0
+    },
+    {
+      "Name": "service Battery (0x180F)",
+      "Status": 4,
+      "Detail": "2A19[Read, Notify]",
+      "Ms": 0
+    },
+    {
+      "Name": "run",
+      "Status": 3,
+      "Detail": "cancelled",
+      "Ms": 0
+    }
+  ],
+  "Services": [
+    {
+      "Uuid": "00001801-0000-1000-8000-00805f9b34fb",
+      "Name": "Generic Attribute (0x1801)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "00001801-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a05-0000-1000-8000-00805f9b34fb",
+          "Name": "Service Changed (0x2A05)",
+          "Properties": "Indicate",
+          "CanRead": false,
+          "CanWrite": false,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "00001801-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002b29-0000-1000-8000-00805f9b34fb",
+          "Name": "0x2B29",
+          "Properties": "Read, Write",
+          "CanRead": true,
+          "CanWrite": true,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "00001801-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002b2a-0000-1000-8000-00805f9b34fb",
+          "Name": "0x2B2A",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "00001801-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002b3a-0000-1000-8000-00805f9b34fb",
+          "Name": "0x2B3A",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "00001800-0000-1000-8000-00805f9b34fb",
+      "Name": "Generic Access (0x1800)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "00001800-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a00-0000-1000-8000-00805f9b34fb",
+          "Name": "Device Name (0x2A00)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "00001800-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a01-0000-1000-8000-00805f9b34fb",
+          "Name": "Appearance (0x2A01)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000fcfe-0000-1000-8000-00805f9b34fb",
+      "Name": "0xFCFE (member UUID, vendor channel 6333133b-...) (0xFCFE)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000fcfe-0000-1000-8000-00805f9b34fb",
+          "Uuid": "6333133b-23c1-11e5-b696-feff819cdc9f",
+          "Name": "6333133b-23c1-11e5-b696-feff819cdc9f",
+          "Properties": "Write",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fcfe-0000-1000-8000-00805f9b34fb",
+          "Uuid": "6333133c-23c1-11e5-b696-feff819cdc9f",
+          "Name": "6333133c-23c1-11e5-b696-feff819cdc9f",
+          "Properties": "Read, Notify",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fcfe-0000-1000-8000-00805f9b34fb",
+          "Uuid": "6333133d-23c1-11e5-b696-feff819cdc9f",
+          "Name": "6333133d-23c1-11e5-b696-feff819cdc9f",
+          "Properties": "Read, WriteWithoutResponse, Notify",
+          "CanRead": true,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fcfe-0000-1000-8000-00805f9b34fb",
+          "Uuid": "63331379-23c1-11e5-b696-feff819cdc9f",
+          "Name": "63331379-23c1-11e5-b696-feff819cdc9f",
+          "Properties": "Read, Write, Notify",
+          "CanRead": true,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000180a-0000-1000-8000-00805f9b34fb",
+      "Name": "Device Information (0x180A)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a29-0000-1000-8000-00805f9b34fb",
+          "Name": "Manufacturer Name (0x2A29)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a24-0000-1000-8000-00805f9b34fb",
+          "Name": "Model Number (0x2A24)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a25-0000-1000-8000-00805f9b34fb",
+          "Name": "Serial Number (0x2A25)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a27-0000-1000-8000-00805f9b34fb",
+          "Name": "Hardware Revision (0x2A27)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a26-0000-1000-8000-00805f9b34fb",
+          "Name": "Firmware Revision (0x2A26)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a28-0000-1000-8000-00805f9b34fb",
+          "Name": "Software Revision (0x2A28)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a23-0000-1000-8000-00805f9b34fb",
+          "Name": "System ID (0x2A23)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a2a-0000-1000-8000-00805f9b34fb",
+          "Name": "0x2A2A",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000180a-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a50-0000-1000-8000-00805f9b34fb",
+          "Name": "PnP ID (0x2A50)",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+      "Name": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+          "Uuid": "0000eb11-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb11-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+          "Uuid": "0000eb12-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb12-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+          "Uuid": "0000eb13-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb13-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Write, Indicate",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000eb10-d102-11e1-9b23-00025b00a5a5",
+          "Uuid": "0000eb14-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb14-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Write",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000fd92-0000-1000-8000-00805f9b34fb",
+      "Name": "0xFD92 (Qualcomm member UUID; eb20-eb22 vendor channel) (0xFD92)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000fd92-0000-1000-8000-00805f9b34fb",
+          "Uuid": "0000eb20-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb20-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Read, Notify",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fd92-0000-1000-8000-00805f9b34fb",
+          "Uuid": "0000eb21-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb21-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Write",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fd92-0000-1000-8000-00805f9b34fb",
+          "Uuid": "0000eb22-d102-11e1-9b23-00025b00a5a5",
+          "Name": "0000eb22-d102-11e1-9b23-00025b00a5a5",
+          "Properties": "Read, Notify",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000fe2c-0000-1000-8000-00805f9b34fb",
+      "Name": "Google Fast Pair (0xFE2C)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1233-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1233-8366-4814-8eb0-01de32100bea",
+          "Properties": "Read",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1234-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1234-8366-4814-8eb0-01de32100bea",
+          "Properties": "Write, Indicate",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1235-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1235-8366-4814-8eb0-01de32100bea",
+          "Properties": "Write, Indicate",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1236-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1236-8366-4814-8eb0-01de32100bea",
+          "Properties": "Write",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": false,
+          "Descriptors": [],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1237-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1237-8366-4814-8eb0-01de32100bea",
+          "Properties": "Write, Indicate",
+          "CanRead": false,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        },
+        {
+          "Service": "0000fe2c-0000-1000-8000-00805f9b34fb",
+          "Uuid": "fe2c1238-8366-4814-8eb0-01de32100bea",
+          "Name": "fe2c1238-8366-4814-8eb0-01de32100bea",
+          "Properties": "Read, Write, Notify",
+          "CanRead": true,
+          "CanWrite": true,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    },
+    {
+      "Uuid": "0000180f-0000-1000-8000-00805f9b34fb",
+      "Name": "Battery (0x180F)",
+      "Error": null,
+      "Characteristics": [
+        {
+          "Service": "0000180f-0000-1000-8000-00805f9b34fb",
+          "Uuid": "00002a19-0000-1000-8000-00805f9b34fb",
+          "Name": "Battery Level (0x2A19)",
+          "Properties": "Read, Notify",
+          "CanRead": true,
+          "CanWrite": false,
+          "CanNotify": true,
+          "Descriptors": [
+            "0x2904",
+            "0x2902"
+          ],
+          "ValueHex": null,
+          "ValueText": null,
+          "Error": null
+        }
+      ]
+    }
+  ],
+  "Notifications": [],
+  "Summary": "5 pass, 1 warn, 1 fail, 1 skipped"
+}

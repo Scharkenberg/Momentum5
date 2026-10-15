@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.SpatialPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Momentum5.App.Controls">
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<TextBlock Text="Immersive audio" Style="{StaticResource PageTitleStyle}" />
+			<InfoBar Severity="Warning" IsOpen="{x:Bind Vm.HasBanner, Mode=OneWay}" IsClosable="False" Message="{x:Bind Vm.Banner, Mode=OneWay}" />
+			<Border Style="{StaticResource CardBorder}">
+				<c:ToggleRow Title="Immersive audio" Setting="{x:Bind Vm.Immersive}" Description="A more immersive experience with stereo and Dolby Atmos content." />
+			</Border>
+			<Border Style="{StaticResource CardBorder}">
+				<StackPanel Spacing="{StaticResource InnerSpacing}">
+					<c:ToggleRow Title="Head tracking" Setting="{x:Bind Vm.HeadTracking}" Description="Immersive sound that stays fixed as you move your head." IsEnabled="{x:Bind Vm.Immersive.Value, Mode=OneWay}" />
+					<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Vm.HeadTrackingHint, Mode=OneWay}" TextWrapping="Wrap" />
+				</StackPanel>
+			</Border>
+			<TextBlock Style="{StaticResource CaptionStyle}" Text="Optimized for Dolby Atmos" HorizontalAlignment="Center" />
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

@@ -1,3 +1,4 @@
+using System;
 using Momentum5.Core.Settings;
 using Momentum5.Protocol;
 using Momentum5.Protocol.Bindings;
@@ -22,10 +23,13 @@ public sealed record GateDecision(GateVerdict Verdict, string? Reason = null)
 	public static GateDecision Consent(string reason) => new(GateVerdict.RequireConsent, reason);
 }
 
-/// <summary>Single-use permission for one Dangerous command (issued by Track X).</summary>
+/// <summary>Single-use permission for one Dangerous command (issued by Track X). Expires when <see cref="ExpiresAt"/> passes.</summary>
 public sealed record ConsentToken(GaiaVendor Vendor, ushort Command, Guid Id)
 {
 	public static ConsentToken For(GaiaVendor vendor, ushort command) => new(vendor, GaiaWord.AsCommand(command), Guid.NewGuid());
+
+	/// <summary>X-01: tokens are time-limited; null only for the legacy parameterless factory.</summary>
+	public DateTimeOffset? ExpiresAt { get; init; }
 }
 
 /// <summary>Per-command, per-session override for a Blocked command (DevTools only).</summary>
@@ -52,6 +56,13 @@ public sealed class SafetyGate : ISafetyGate
 {
 	private readonly Lock _gate = new();
 	private readonly HashSet<Guid> _consumed = [];
+	private readonly TimeProvider _time;
+
+	/// <param name="time">Clock for consent-token expiry (X-01); defaults to the system clock.</param>
+	public SafetyGate(TimeProvider? time = null)
+	{
+		_time = time ?? TimeProvider.System;
+	}
 
 	public GateDecision Check(
 		GaiaVendor vendor,
@@ -121,6 +132,11 @@ public sealed class SafetyGate : ISafetyGate
 		if (token is null || token.Vendor != vendor || GaiaWord.AsCommand(token.Command) != cmd)
 		{
 			return GateDecision.Consent("Dangerous command: a matching consent token is required.");
+		}
+
+		if (token.ExpiresAt is { } expiry && _time.GetUtcNow() > expiry)
+		{
+			return GateDecision.Deny("Consent token expired — confirm the action again.");
 		}
 
 		lock (_gate)

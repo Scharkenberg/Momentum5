@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.DevicePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Momentum5.App.Controls"
+    xmlns:vm="using:Momentum5.App.ViewModels">
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<TextBlock Text="Device" Style="{StaticResource PageTitleStyle}" />
+			<Border Style="{StaticResource CardBorder}">
+				<ItemsControl ItemsSource="{x:Bind Vm.Info}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate x:DataType="vm:InfoRow">
+							<cp:WrapPanel HorizontalSpacing="8" VerticalSpacing="0" Margin="0,3">
+								<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Label}" MinWidth="96" />
+								<TextBlock Text="{x:Bind Value}" IsTextSelectionEnabled="True" TextWrapping="Wrap" />
+							</cp:WrapPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</Border>
+			<Border Style="{StaticResource CardBorder}">
+				<StackPanel Spacing="{StaticResource InnerSpacing}">
+					<TextBlock Text="Rename headset" Style="{StaticResource CardTitleStyle}" />
+					<TextBox Header="Name" Text="{x:Bind Vm.NameInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+					<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Vm.ByteCountText, Mode=OneWay}" />
+					<cp:WrapPanel>
+						<Button Click="Rename_Click" IsEnabled="{x:Bind Vm.CanRename, Mode=OneWay}" ToolTipService.ToolTip="Rename…" AutomationProperties.Name="Rename…" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE70F;" /></Button>
+						<Button Command="{x:Bind Vm.RefreshCommand}" ToolTipService.ToolTip="Refresh" AutomationProperties.Name="Refresh" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE72C;" /></Button>
+					</cp:WrapPanel>
+					<TextBlock Text="{x:Bind Vm.Message, Mode=OneWay}" TextWrapping="Wrap" />
+				</StackPanel>
+			</Border>
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

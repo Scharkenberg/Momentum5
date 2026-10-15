@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.NoiseControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Momentum5.App.Controls">
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<TextBlock Text="Noise control" Style="{StaticResource PageTitleStyle}" />
+			<c:NoiseCard Vm="{x:Bind Vm}" />
+
+			<Border Style="{StaticResource CardBorder}">
+				<StackPanel Spacing="{StaticResource InnerSpacing}">
+					<TextBlock Text="Anti-wind settings" Style="{StaticResource CardTitleStyle}" />
+					<TextBlock Style="{StaticResource CaptionStyle}" Text="Reduce wind noise in ANC." />
+					<c:SegmentedControl Options="Auto,Max" SelectedIndex="{x:Bind Vm.WindChoiceIndex, Mode=TwoWay}" IsEnabled="{x:Bind Vm.WindChoiceEnabled, Mode=OneWay}" />
+					<TextBlock Style="{StaticResource CaptionStyle}" Text="Auto is remembered by this app; the headset reports it as Max." TextWrapping="Wrap" />
+				</StackPanel>
+			</Border>
+
+			<Border Style="{StaticResource CardBorder}">
+				<StackPanel Spacing="{StaticResource InnerSpacing}">
+					<c:SwitchRow Title="Phone calls" Description="Activate transparency during phone calls." IsOn="{x:Bind Vm.CallsOn, Mode=TwoWay}" IsEnabled="{x:Bind Vm.PhoneCalls.IsEnabled, Mode=OneWay}" Warning="{x:Bind Vm.PhoneCalls.Warning, Mode=OneWay}" />
+					<Slider Minimum="1" Maximum="4" StepFrequency="1" TickFrequency="1" TickPlacement="Outside"
+					        Value="{x:Bind Vm.PhoneCalls.NumericValue, Mode=TwoWay}" IsEnabled="{x:Bind Vm.CallsLevelEnabled, Mode=OneWay}" />
+					<Grid>
+						<TextBlock Style="{StaticResource CaptionStyle}" Text="Low" />
+						<TextBlock Style="{StaticResource CaptionStyle}" Text="High" HorizontalAlignment="Right" />
+					</Grid>
+				</StackPanel>
+			</Border>
+
+			<Border Style="{StaticResource CardBorder}">
+				<c:SwitchRow Title="Auto-pause" Description="Pause audio when transparency is enabled." IsOn="{x:Bind Vm.AutoPause.Value, Mode=TwoWay}" IsEnabled="{x:Bind Vm.AutoPause.IsEnabled, Mode=OneWay}" Warning="{x:Bind Vm.AutoPause.Warning, Mode=OneWay}" />
+			</Border>
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

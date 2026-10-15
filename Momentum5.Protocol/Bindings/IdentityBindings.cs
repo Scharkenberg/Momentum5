@@ -90,7 +90,7 @@ public static class IdentityBindings
 			return false;
 		}
 
-		payload = Codecs.CString.Encode(value);
+		payload = bytes;
 		error = null;
 		return true;
 	}

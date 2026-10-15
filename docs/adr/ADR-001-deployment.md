@@ -1,0 +1,152 @@
+# ADR-001 — Deployment: full-trust MSIX plus self-contained portable zip
+
+Status: accepted · 2026-10-15 · bucket I-02
+Related: [release checklist](../release.md) · [README](../../README.md) · [ARCHITECTURE](../ARCHITECTURE.md) · [ERRATA (G1/T-03)](../plan/ERRATA.md) · [ref/05 stack](../plan/ref/05-stack.md)
+
+## Context
+
+The facts that constrain the decision:
+
+- The App is a WinUI 3 app wired up for the **single-project MSIX tooling**:
+  `EnableMsixTooling=true`, the `Msix` project capability,
+  `HasPackageAndPublishMenu`, and
+  [Package.appxmanifest](../../Momentum5.App/Package.appxmanifest) declaring
+  full trust (`rescap:runFullTrust`) plus the `bluetooth` device capability.
+  Platforms are `x64;ARM64` with `RuntimeIdentifiers win-x64;win-arm64`, and
+  [launchSettings.json](../../Momentum5.App/Properties/launchSettings.json)
+  already has packaged, unpackaged and simulate run profiles.
+- The Windows App SDK pin is the **experimental** line `2.5.4-experimental`
+  ([Directory.Packages.props](../../Directory.Packages.props));
+  [ref/05](../plan/ref/05-stack.md) explicitly defers `WindowsAppSDKSelfContained`
+  to this ADR.
+- The GAIA control plane (WinRT `RfcommDeviceService`/`StreamSocket`) is proven
+  to work in an **unpackaged console process** (G1 spike PASSED, ERRATA T-03:
+  SDP query, first-try connect, `RequestAccessAsync` consent without a UI
+  marshal, model/firmware/battery reads over GAIA). Deployment mode does not
+  change transport capability; Bluetooth consent behaves the same packaged and
+  unpackaged.
+- CI is GitHub Actions `windows-latest` with the .NET 11 preview SDK
+  ([ci.yml](../../.github/workflows/ci.yml)); it has no code-signing
+  certificate and cannot install or run anything on a clean machine. The user
+  is the only committer and the only one with Windows hardware and a clean VM
+  (agent output contract, ref/05).
+- First-release audience: the sponsor's own machines plus community users who
+  either sideload an MSIX or unzip a folder. Store/winget distribution is out
+  of scope for 0.x.
+
+## Decision
+
+Ship **both** deployment forms, built from the same tree by
+[release.yml](../../.github/workflows/release.yml) on every `v*` tag.
+
+**(a) Full-trust MSIX, framework-dependent.** Produced by the existing
+single-project tooling with a build-time package generation (Microsoft Learn,
+"Set up continuous integration for your WinUI app"):
+
+```
+dotnet build Momentum5.App/Momentum5.App.csproj -c Release -p:Platform=x64 `
+  -p:GenerateAppxPackageOnBuild=true -p:AppxPackageDir=../publish/msix/x64 `
+  -p:AppxBundle=Never -p:AppxPackageSigningEnabled=false
+```
+
+(same for `-p:Platform=ARM64`). The MSIX requires the Windows App SDK 2.5.x
+runtime on the machine. CI ships it **unsigned**; the user signs it before
+distributing (see the [release checklist](../release.md)).
+
+**(b) Self-contained portable ZIP per RID (`win-x64`, `win-arm64`), unpackaged,
+bundling `m5ctl.exe`.** Folder publish of the App through the new publish
+profiles `Momentum5.App/Properties/PublishProfiles/win-{x64,arm64}.pubxml`:
+
+| Property | Value | Meaning |
+|---|---|---|
+| `RuntimeIdentifier` | `win-x64` / `win-arm64` | per-RID publish, matches the csproj `RuntimeIdentifiers` |
+| `SelfContained` | `true` | app carries its own .NET runtime |
+| `WindowsAppSDKSelfContained` | `true` | app carries its own Windows App SDK runtime |
+| `WindowsPackageType` | `None` | unpackaged app; automatic bootstrap initialization |
+| `PublishReadyToRun` | `true` | ready-to-run, restating the csproj Release default |
+
+**Self-contained for the zip** because the zip's reason to exist is "extract
+and run on a clean machine". Framework-dependent would require installing the
+*experimental* Windows App SDK runtime (and the .NET runtime) before first
+use, adding a version-mismatch failure mode pinned to an experimental line.
+**Framework-dependent for the MSIX** because that audience already accepts an
+installer: the package stays small and the runtime is updated independently —
+the standard packaged-app trade. Self-contained MSIX remains possible later
+(the same `WindowsAppSDKSelfContained` switch) if the experimental runtime pin
+becomes a support problem.
+
+### Portable zip layout and the m5ctl build
+
+```
+Momentum5_<tag>_win-<rid>_portable.zip
+  Momentum5.App.exe + app files     (self-contained, unpackaged)
+  m5ctl/m5ctl.exe + CLI files       (self-contained)
+```
+
+`m5ctl` needs **no csproj change**: the RID and the self-contained flag are
+publish arguments. This is the documented command (release.yml uses it; run it
+from the repo root):
+
+```
+dotnet publish Momentum5.Cli/Momentum5.Cli.csproj -c Release -r win-x64  --self-contained -o publish/win-x64/m5ctl
+dotnet publish Momentum5.Cli/Momentum5.Cli.csproj -c Release -r win-arm64 --self-contained -o publish/win-arm64/m5ctl
+```
+
+The MSIX path is unaffected by the pubxml profiles: publish profiles are
+imported only for the Publish target, while the MSIX is generated by
+`dotnet build` (`GenerateAppxPackageOnBuild`). Local dev runs and ci.yml
+therefore keep the packaged default.
+
+## Alternatives considered
+
+- **Framework-dependent portable zip** — rejected: installer prerequisites on
+  a clean machine defeat the "extract and run" property; the runtime line is
+  experimental.
+- **Self-contained MSIX only (no zip)** — rejected: sideload, signing and
+  developer-mode friction with no low-trust entry path.
+- **`PublishTrimmed` / `PublishSingleFile`** — rejected: WinUI XAML, WinRT
+  projections and H.NotifyIcon are not trim-safe (csproj already pins
+  `PublishTrimmed=false`); single-file is not supported for WinUI apps.
+- **CI signing with a workflow-generated self-signed certificate** — rejected:
+  a CI-generated certificate is trusted by nobody; signing belongs to the
+  user's identity at release time.
+- **Win32 installer (MSI / WiX / Inno Setup)** — rejected: duplicates what the
+  MSIX already provides (Start menu entry, uninstall, identity) without the
+  zip's portability; two forms are enough to maintain.
+- **winget / Microsoft Store** — deferred, not rejected: needs a stable
+  Windows App SDK line and a maintained signing identity; revisit post-1.0 in
+  a new ADR.
+
+## Consequences
+
+- **Positive**: clean machines run the zip with zero prerequisites; CI can
+  produce all four artifacts (two zips, two MSIX) without a certificate; the
+  MSIX path is preserved for a future Store/winget distribution and for
+  anything that wants package identity; both forms run the same RFCOMM, tray
+  (H.NotifyIcon) and toast code paths that G1 and the App's unpackaged
+  launchSettings profile already exercise.
+- **Zip size**: each RID carries the .NET runtime, the Windows App SDK runtime
+  and ready-to-run images — expect on the order of 100 MB per zip. The exact
+  size is recorded at v0.1.0 and this decision is revisited if it matters.
+- **Two forms to regression-test per release**: the clean Windows 11 26H2 VM
+  check (MSIX installs and runs; zip runs unpackaged; tray and RFCOMM work in
+  both) is the I-02 "done when" gate, cannot run in CI, and is the user's
+  manual step — tracked in the [release checklist](../release.md).
+- **MSIX from CI is unsigned** (`AppxPackageSigningEnabled=false`): not
+  installable as-is. The user signs with `signtool` before distributing, and a
+  sideloaded MSIX additionally needs the Windows App SDK runtime installed on
+  the target machine.
+- **The MSIX version is manual**: `Package.appxmanifest` `Identity/Version` is
+  bumped in the release commit; CI does not rewrite the manifest.
+- **Rolling the Windows App SDK pin** (experimental to stable) re-opens only
+  the MSIX half of this decision; the zip stays self-contained.
+
+Property references (Microsoft Learn): "Windows App SDK deployment guide for
+self-contained apps" (`WindowsAppSDKSelfContained`), "Distribute an unpackaged
+WinUI 3 app" (`WindowsPackageType=None`), "Set up continuous integration for
+your WinUI app" (`GenerateAppxPackageOnBuild`, `AppxPackageDir`,
+`AppxBundle=Never`, unsigned CI builds). These are the documented deployment
+properties of the Windows App SDK MSBuild surface; the repo pin
+`2.5.4-experimental` is expected to carry the same property names — if the
+experimental package diverges, the first `dotnet publish` on the user's
+machine surfaces it and this ADR gets an ERRATA entry.

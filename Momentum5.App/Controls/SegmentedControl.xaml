@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Momentum5.App.Controls.SegmentedControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="SegClear" Color="Transparent" />
+		<SolidColorBrush x:Key="SegWhite" Color="White" />
+		<SolidColorBrush x:Key="SegHover" Color="#22FFFFFF" />
+		<StaticResource x:Key="ToggleButtonBackground" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBackgroundPointerOver" ResourceKey="SegHover" />
+		<StaticResource x:Key="ToggleButtonBackgroundPressed" ResourceKey="SegHover" />
+		<StaticResource x:Key="ToggleButtonBackgroundChecked" ResourceKey="BrandGradientBrush" />
+		<StaticResource x:Key="ToggleButtonBackgroundCheckedPointerOver" ResourceKey="BrandGradientBrush" />
+		<StaticResource x:Key="ToggleButtonBackgroundCheckedPressed" ResourceKey="BrandGradientBrush" />
+		<StaticResource x:Key="ToggleButtonBackgroundDisabled" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrush" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrushPointerOver" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrushPressed" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrushChecked" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonBorderBrushCheckedPressed" ResourceKey="SegClear" />
+		<StaticResource x:Key="ToggleButtonForegroundChecked" ResourceKey="SegWhite" />
+		<StaticResource x:Key="ToggleButtonForegroundCheckedPointerOver" ResourceKey="SegWhite" />
+		<StaticResource x:Key="ToggleButtonForegroundCheckedPressed" ResourceKey="SegWhite" />
+	</UserControl.Resources>
+	<Border CornerRadius="{StaticResource RadiusM}" Padding="4" Background="{ThemeResource PillBrush}">
+		<Grid x:Name="Host" ColumnSpacing="4" />
+	</Border>
+</UserControl>

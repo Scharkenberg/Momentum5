@@ -46,7 +46,7 @@ public class IdentityBindingTests
 		Assert.False(Support.TrySet(Keys.LocalName, "Seventeen bytes!!!"));
 		Assert.False(Support.TrySet(Keys.LocalName, string.Empty));
 		Assert.False(Support.TrySet(Keys.LocalName, "a\0b"));
-		Assert.Equal(Hex.Parse("4142" + "00"), Support.Set(Keys.LocalName, "AB"));
+		Assert.Equal(Hex.Parse("4142"), Support.Set(Keys.LocalName, "AB"));
 		Assert.Equal(SafetyClass.Gated, Support.Of(Keys.LocalName).Safety);
 	}
 

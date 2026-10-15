@@ -68,7 +68,7 @@ public static class GaiaCatalog
 	private static State Build()
 	{
 		var registry = new BindingRegistry();
-		foreach (var list in new[] { IdentityBindings.All, AncBindings.All, EqBindings.All, ToggleBindings.All, ConnectionBindings.All })
+		foreach (var list in new[] { IdentityBindings.All, AncBindings.All, EqBindings.All, ToggleBindings.All, ConnectionBindings.All, MmiBindings.All })
 		{
 			foreach (var b in list)
 			{

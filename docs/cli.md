@@ -21,6 +21,19 @@ Aliases: `anc` (on/off), `anc adaptive on|off`, `anc antiwind off|max|auto`, `tr
 `touch`, `wear`, `battery`, `name`, `sidetone`, `prompt`, `soundmode`, `autooff`. Any name from `keys` works (case-insensitive;
 indexed ones as `eqband 3` or `eqband[3]`). Negative numbers need `--`: `m5ctl eq band 3 -- -6`.
 
+## watch / presence / batterycheck
+`watch` keeps running across headset power-cycles and prints `# Phase` state lines. `presence` prints classic connect/disconnect, BLE adverts, radio state and HFP battery (no GAIA session). `batterycheck` passes when GAIA 0603 and HFP battery differ by at most 1 %.
+
+## selftest (gate G2)
+`m5ctl selftest [--json]`: connect, identity, battery, refresh-all, then AncLevel, PhoneCallTransparency and PromptMode are each written, verified by read-back, checked for an unsolicited push, and restored. Exit 0 = all PASS (and < 30 s), 1 = any FAIL.
+
+Without `--address`/`--name`, the CLI reuses the last successfully connected device.
+
+## gatt (BLE/GATT diagnostics)
+
+`m5ctl gatt scan [--seconds 8]` lists BLE advertisers merged with devices Windows knows (`*` = likely headset).
+`m5ctl gatt diag [--le <addr>] [--cycles 5] [--listen 5] [--gaia-probe] [--out report.json]` runs: open, uncached/cached discovery, service presence (1800/180A/180F/GAIA), read all readable characteristics, notification listen, optional read-only GAIA `Q:0000` probe, connect/disconnect cycles with timings. Exit 1 on any FAIL. The headset advertises only in pairing mode; without `--le` the target is auto-picked (Swift Pair beacon matching the last classic address, else name match).
+
 ## Exit codes
 
 | Code | Meaning |

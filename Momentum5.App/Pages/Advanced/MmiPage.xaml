@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Momentum5.App.Pages.Advanced.MmiPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cp="using:Momentum5.App.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Momentum5.App.ViewModels"
+    NavigationCacheMode="Enabled"
+    Loaded="OnPageLoaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Padding="{ThemeResource PageMargin}"
+            Spacing="{ThemeResource PageSpacing}"
+            MaxWidth="1000"
+            HorizontalAlignment="Stretch">
+
+            <!-- Persistent banner: editor deferred (R-04), reset console-only (Blocked raw row) -->
+            <InfoBar
+                IsClosable="False"
+                IsOpen="True"
+                Severity="Informational"
+                Title="Read-only"
+                Message="The payload format is not decoded yet — the editor unlocks after the R-04 capture. Reset (1604) stays available only through the GAIA console."
+                AutomationProperties.Name="MMI read-only notice" />
+
+            <TextBlock
+                Text="{x:Bind ViewModel.Warning, Mode=OneWay}"
+                Visibility="{x:Bind WarningVis(ViewModel.Warning), Mode=OneWay}"
+                Style="{ThemeResource BaseTextBlockStyle}"
+                Foreground="{ThemeResource StatusBadBrush}"
+                TextWrapping="Wrap" />
+
+            <!-- Slot table -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="{StaticResource InnerSpacing}">
+                    <Grid ColumnSpacing="{StaticResource InnerSpacing}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2">
+                            <TextBlock Text="Touch buttons (MMI)" Style="{StaticResource CardTitleStyle}" />
+                            <TextBlock
+                                Text="Raw MMI (touch/button) mapping replies. The format is not decoded, so nothing is interpreted."
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Button
+                            Grid.Column="1"
+                            Content="&#xE72C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            VerticalAlignment="Bottom"
+                            Click="OnReadClick"
+                            IsEnabled="{x:Bind NotBusy(ViewModel.IsBusy), Mode=OneWay}"
+                            AutomationProperties.Name="Read the MMI mapping from the headphones"
+                            ToolTipService.ToolTip="Live GETs of every MMI slot plus the 1605 default-state read"  Style="{StaticResource IconButtonStyle}" />
+                    </Grid>
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Visibility="{x:Bind BusyVis(ViewModel.IsBusy), Mode=OneWay}"
+                        AutomationProperties.Name="Reading the MMI mapping" />
+                    <TextBlock
+                        Text="Connect the headphones in Windows first, then open this page."
+                        Visibility="{x:Bind NotAvailableVis(ViewModel.IsAvailable), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Grid ColumnSpacing="{StaticResource InnerSpacing}" Padding="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Text="Slot"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="Raw value (GET 1601)"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Rows, Mode=OneWay}" AutomationProperties.Name="MMI slot table">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MmiSlotVm">
+                                <cp:WrapPanel MinHeight="{ThemeResource RowMinHeight}" HorizontalSpacing="{StaticResource InnerSpacing}" VerticalSpacing="0">
+                                    <TextBlock
+                                        Text="{x:Bind SlotText}"
+                                        Style="{ThemeResource BaseTextBlockStyle}"
+                                        VerticalAlignment="Center" />
+                                    <TextBlock
+                                        Text="{x:Bind ValueText, Mode=OneWay}"
+                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                        FontFamily="Cascadia Mono,Consolas"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Center" />
+                                </cp:WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock
+                        Text="Slot N is the reply to GET 1601 with the two selector bytes 00 0N (M4 model: button 0, pattern N — unverified on M5). Values are shown verbatim."
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Grid MinHeight="{ThemeResource RowMinHeight}" ColumnSpacing="{StaticResource InnerSpacing}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
+                            <TextBlock Text="Default mapping (GET 1605)" Style="{ThemeResource BaseTextBlockStyle}" />
+                            <TextBlock
+                                Text="The M4 device model documents a BOOL reply (01 = default); the M5 value is unverified."
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{x:Bind ViewModel.DefaultMappingText, Mode=OneWay}"
+                            Style="{ThemeResource BodyStrongTextBlockStyle}"
+                            FontFamily="Cascadia Mono,Consolas"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Full-table degrade note: every probed slot answered an error -->
+            <InfoBar
+                IsClosable="False"
+                IsOpen="{x:Bind ViewModel.AllSlotsAbsent, Mode=OneWay}"
+                Severity="Warning"
+                Title="MMI table unavailable"
+                Message="No probed slot answered a 1601 read — the mapping table is not readable on this headset or connection."
+                AutomationProperties.Name="MMI table unavailable" />
+
+            <!-- Notes -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Notes" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <TextBlock
+                        Text="Each row shows the raw reply bytes verbatim — no interpretation is applied."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Slots the headset does not answer show 'not present'."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Reset (1604) is a Blocked command: it stays reachable only through the GAIA console (Advanced → Console)."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Remapping (SET 1600) is deferred until the R-04 capture decodes the payload format."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

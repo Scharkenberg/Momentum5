@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Momentum5.App.Pages.Advanced.ParametricEqPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cp="using:Momentum5.App.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Momentum5.App.ViewModels"
+    NavigationCacheMode="Enabled"
+    Loaded="OnPageLoaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel Padding="{ThemeResource PageMargin}" Spacing="{ThemeResource PageSpacing}" MaxWidth="1000" HorizontalAlignment="Stretch">
+
+            <!-- Persistent banner: X-04 keeps the panel read-only until R-04/R-05 confirm the SET semantics -->
+            <InfoBar
+                IsClosable="False"
+                IsOpen="True"
+                Severity="Warning"
+                Title="Read-only"
+                Message="Parametric EQ is read-only: the write commands are not confirmed for this firmware yet (research lanes R-04/R-05 pending)."
+                AutomationProperties.Name="Parametric EQ is read-only" />
+
+            <!-- Band table -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
+                            <TextBlock Text="Parametric EQ" Style="{StaticResource CardTitleStyle}" />
+                            <TextBlock
+                                Text="{x:Bind ViewModel.EqSummary, Mode=OneWay}"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                        <Button
+                            Grid.Column="1"
+                            Content="&#xE72C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            Click="OnReadFromDevice"
+                            IsEnabled="{x:Bind NotBusy(ViewModel.IsBusy), Mode=OneWay}"
+                            AutomationProperties.Name="Read the parametric EQ from the device"
+                            ToolTipService.ToolTip="Refreshes the equalizer group and reads every band's frequency, Q and filter type"  Style="{StaticResource IconButtonStyle}" />
+                    </Grid>
+                    <TextBlock
+                        Text="Q and filter type are raw bytes exactly as answered by the headset; their payload formats are unverified."
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.ReadOnlyNote, Mode=OneWay}"
+                        Visibility="{x:Bind WarningVis(ViewModel.ReadOnlyNote), Mode=OneWay}"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource StatusWarnBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.Warning, Mode=OneWay}"
+                        Visibility="{x:Bind WarningVis(ViewModel.Warning), Mode=OneWay}"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource StatusBadBrush}"
+                        TextWrapping="Wrap"
+                        AutomationProperties.Name="Warning" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.WaitingText, Mode=OneWay}"
+                        Visibility="{x:Bind WarningVis(ViewModel.WaitingText), Mode=OneWay}"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Visibility="{x:Bind BusyVis(ViewModel.IsBusy), Mode=OneWay}"
+                        AutomationProperties.Name="Reading the parametric EQ" />
+                    <Grid ColumnSpacing="8" Padding="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="1.2*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1.4*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="Band"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="Frequency"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="Q (raw)"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock
+                            Grid.Column="3"
+                            Text="Filter (raw)"
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Bands, Mode=OneWay}" AutomationProperties.Name="Parametric EQ bands">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:PeqBandVm">
+                                <Grid MinHeight="{ThemeResource RowMinHeight}" ColumnSpacing="8" Padding="0,4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.6*" />
+                                        <ColumnDefinition Width="1.2*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1.4*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Text="{x:Bind BandText}"
+                                        VerticalAlignment="Center"
+                                        Style="{ThemeResource BodyTextBlockStyle}" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Text="{x:Bind FrequencyText, Mode=OneWay}"
+                                        VerticalAlignment="Center"
+                                        Style="{ThemeResource BodyTextBlockStyle}" />
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Text="{x:Bind QText, Mode=OneWay}"
+                                        VerticalAlignment="Center"
+                                        Style="{ThemeResource BodyTextBlockStyle}" />
+                                    <TextBlock
+                                        Grid.Column="3"
+                                        Text="{x:Bind FilterText, Mode=OneWay}"
+                                        VerticalAlignment="Center"
+                                        Style="{ThemeResource BodyTextBlockStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Notes -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Notes" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <TextBlock
+                        Text="When the headset rejects the parametric reads (firmware error 00 or 01), this panel stops reading and stays read-only."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Use the GAIA console or the trace view to capture the raw replies for the R-04/R-05 fixture dump."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

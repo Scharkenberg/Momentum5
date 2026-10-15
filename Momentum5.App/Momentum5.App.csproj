@@ -14,16 +14,30 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <ImplicitUsings>disable</ImplicitUsings>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Runtime footprint: one workstation GC without the background GC thread, no PGO instrumentation, no ETW EventSource, only the languages the UI ships. -->
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <ServerGarbageCollector>false</ServerGarbageCollector>
+    <TieredPGO>false</TieredPGO>
+    <EventSourceSupport>false</EventSourceSupport>
+    <SatelliteResourceLanguages>en;de</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-*.png" />
+    <Content Include="Assets\LockScreenLogo.scale-*.png" />
+    <Content Include="Assets\Square150x150Logo.scale-*.png" />
+    <Content Include="Assets\Square44x44Logo.scale-*.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-*.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-*.png" />
+    <Content Include="Assets\AppIcon.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\AppIcon.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\AppIcon24.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,12 +54,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="H.NotifyIcon.WinUI" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Momentum5.Core\Momentum5.Core.csproj" />
     <ProjectReference Include="..\Momentum5.Protocol\Momentum5.Protocol.csproj" />
+    <ProjectReference Include="..\Momentum5.Client\Momentum5.Client.csproj" />
+    <ProjectReference Include="..\Momentum5.Simulation\Momentum5.Simulation.csproj" />
     <ProjectReference Include="..\Momentum5.Transport.Ble\Momentum5.Transport.Ble.csproj" />
+    <ProjectReference Include="..\Momentum5.Transport.Rfcomm\Momentum5.Transport.Rfcomm.csproj" />
   </ItemGroup>
 
   <!--

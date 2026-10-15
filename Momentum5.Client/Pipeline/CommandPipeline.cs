@@ -74,6 +74,17 @@ public sealed class CommandPipeline : IAsyncDisposable
 
 		var safety = GaiaCatalog.SafetyOf(vendor, command);
 		var attempts = safety == SafetyClass.Read ? 2 : 1;
+
+		// X-01: Dangerous executions log intent before the write and the outcome after it.
+		var dangerous = safety == SafetyClass.Dangerous;
+		if (dangerous)
+		{
+			var grant = options.Consent is { } consent ? $"consent {consent.Id:N}"
+				: options.Override is { } over ? $"override {over.Vendor}:{GaiaWord.AsCommand(over.Command):X4}"
+					: "no grant";
+			_log?.Invoke($"DANGEROUS start {vendor}:{GaiaWord.AsCommand(command):X4} ({grant}) payload {GaiaFormatter.Hex(payload.Span)}");
+		}
+
 		await _single.WaitAsync(ct).ConfigureAwait(false);
 		try
 		{
@@ -81,11 +92,22 @@ public sealed class CommandPipeline : IAsyncDisposable
 			{
 				try
 				{
-					return await SendOnceAsync(vendor, command, payload, options, safety, ct).ConfigureAwait(false);
+					var reply = await SendOnceAsync(vendor, command, payload, options, safety, ct).ConfigureAwait(false);
+					if (dangerous)
+					{
+						_log?.Invoke($"DANGEROUS done  {vendor}:{GaiaWord.AsCommand(command):X4} -> {GaiaFormatter.Describe(reply, FrameDirection.Rx)}");
+					}
+
+					return reply;
 				}
 				catch (TimeoutException) when (attempt < attempts)
 				{
 					_log?.Invoke($"Timeout on {vendor}:{GaiaWord.AsCommand(command):X4}; retrying once.");
+				}
+				catch (Exception ex) when (dangerous)
+				{
+					_log?.Invoke($"DANGEROUS fail  {vendor}:{GaiaWord.AsCommand(command):X4}: {ex.Message}");
+					throw;
 				}
 			}
 		}

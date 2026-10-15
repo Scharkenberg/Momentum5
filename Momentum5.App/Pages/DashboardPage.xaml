@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Momentum5.App.Controls"
+    xmlns:svc="using:Momentum5.App.Services"
+    xmlns:m="using:Momentum5.App.Services">
+
+	<Grid>
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<InfoBar IsOpen="{x:Bind Vm.ShowGuidance, Mode=OneWay}" IsClosable="False" Severity="Informational"
+			         Title="No headset selected"
+			         Message="Open Headset link and pick your headset (renamed headsets are fine). If it is not listed, pair it in Windows Settings → Bluetooth &amp; devices first.">
+				<InfoBar.ActionButton>
+					<HyperlinkButton Content="Open Bluetooth settings" NavigateUri="ms-settings:bluetooth" />
+				</InfoBar.ActionButton>
+			</InfoBar>
+
+			<InfoBar IsOpen="{x:Bind Vm.ShowTrustBanner, Mode=OneWay}" IsClosable="False" Severity="Warning"
+			         Message="{x:Bind Vm.TrustMessage, Mode=OneWay}" />
+
+			<Border x:Name="Hero" CornerRadius="{StaticResource RadiusXL}" Padding="16" Background="{StaticResource HeroGradientBrush}" m:Motion.Reveal="True" SizeChanged="Hero_SizeChanged">
+				<Grid>
+					<Border CornerRadius="{StaticResource RadiusXL}" Background="{StaticResource HeroSheenBrush}" IsHitTestVisible="False" Margin="-16" />
+					<Grid x:Name="HeroGrid" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="16">
+						<StackPanel Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+							<Grid x:Name="HeroBadge" Width="52" Height="52">
+								<Image Stretch="Uniform" AutomationProperties.AccessibilityView="Raw">
+									<Image.Source>
+										<BitmapImage UriSource="ms-appx:///Assets/AppIcon.png" DecodePixelWidth="192" />
+									</Image.Source>
+								</Image>
+							</Grid>
+							<StackPanel VerticalAlignment="Center" Spacing="4">
+								<TextBlock Text="{x:Bind Vm.HeadsetName, Mode=OneWay}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White" TextWrapping="Wrap" />
+								<TextBlock Text="{x:Bind Vm.SubtitleText, Mode=OneWay}" Foreground="#D9FFFFFF" Visibility="{x:Bind svc:UiFn.Vis(Vm.SubtitleText), Mode=OneWay}" TextWrapping="Wrap" />
+							</StackPanel>
+						</StackPanel>
+						<StackPanel x:Name="HeroRing" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="6">
+							<Grid x:Name="RingBox" Width="72" Height="72">
+								<ProgressRing IsIndeterminate="False" Minimum="0" Maximum="100" Value="{x:Bind Vm.BatteryPercent, Mode=OneWay}"
+								              x:Name="Ring" Width="72" Height="72" Foreground="White" Background="#40FFFFFF" AutomationProperties.Name="Battery level" />
+								<TextBlock Text="{x:Bind Vm.BatteryText, Mode=OneWay}" Style="{StaticResource CardTitleStyle}" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Grid>
+							<StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+								<c:BatteryIcon Percent="{x:Bind Vm.BatteryPercent, Mode=OneWay}" Charging="{x:Bind Vm.IsCharging, Mode=OneWay}" HasValue="{x:Bind Vm.HasBattery, Mode=OneWay}" Foreground="White" />
+								<TextBlock Text="{x:Bind Vm.ChargingText, Mode=OneWay}" Foreground="#D9FFFFFF" VerticalAlignment="Center" />
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+				</Grid>
+			</Border>
+
+			<c:NoiseCard Vm="{x:Bind Vm.Noise}" cp:ColumnPanel.Flow="True" />
+					<Border Style="{StaticResource CardBorder}">
+						<Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{StaticResource InnerSpacing}">
+							<FontIcon Glyph="&#xE7F8;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Top" />
+							<StackPanel Grid.Column="1" Spacing="4">
+								<TextBlock Text="Connection management" Style="{StaticResource CardTitleStyle}" />
+								<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Vm.ConnectedText, Mode=OneWay}" TextWrapping="Wrap" />
+							</StackPanel>
+							<Button Grid.Column="2" VerticalAlignment="Top" Click="Manage_Click" ToolTipService.ToolTip="Manage connections" AutomationProperties.Name="Manage connections" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE76C;" /></Button>
+						</Grid>
+					</Border>
+
+					<Border Style="{StaticResource CardBorder}">
+						<StackPanel Spacing="{StaticResource InnerSpacing}">
+							<Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{StaticResource InnerSpacing}">
+								<FontIcon Glyph="&#xE8D6;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Top" />
+								<StackPanel Grid.Column="1">
+									<TextBlock Text="My sound" Style="{StaticResource CardTitleStyle}" />
+									<TextBlock Style="{StaticResource CaptionStyle}" Text="Personalize your sound." />
+								</StackPanel>
+								<Button Grid.Column="2" Click="Sound_Click" ToolTipService.ToolTip="Open My sound" AutomationProperties.Name="Open My sound" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE76C;" /></Button>
+							</Grid>
+							<c:SwitchRow Title="Bass boost" IsOn="{x:Bind Vm.BassBoost.Value, Mode=TwoWay}" IsEnabled="{x:Bind Vm.BassBoost.IsEnabled, Mode=OneWay}" Warning="{x:Bind Vm.BassBoost.Warning, Mode=OneWay}" />
+						</StackPanel>
+					</Border>
+
+					<Border Style="{StaticResource CardBorder}">
+						<StackPanel Spacing="{StaticResource InnerSpacing}">
+							<Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{StaticResource InnerSpacing}">
+								<FontIcon Glyph="&#xE774;" FontSize="20" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Top" />
+								<StackPanel Grid.Column="1">
+									<TextBlock Text="Immersive audio" Style="{StaticResource CardTitleStyle}" />
+									<TextBlock Style="{StaticResource CaptionStyle}" Text="A more immersive experience with stereo and Dolby Atmos content." TextWrapping="Wrap" />
+								</StackPanel>
+								<Button Grid.Column="2" Click="Immersive_Click" ToolTipService.ToolTip="Open Immersive audio" AutomationProperties.Name="Open Immersive audio" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE76C;" /></Button>
+							</Grid>
+							<c:SegmentedControl Options="On,Off" SelectedIndex="{x:Bind Vm.ImmersiveIndex, Mode=TwoWay}" IsEnabled="{x:Bind Vm.Immersive.IsEnabled, Mode=OneWay}" AutomationProperties.Name="Immersive audio" />
+							<TextBlock Text="{x:Bind Vm.Immersive.Warning, Mode=OneWay}" Foreground="{ThemeResource SystemFillColorCautionBrush}" TextWrapping="Wrap" Visibility="{x:Bind svc:UiFn.Vis(Vm.Immersive.Warning), Mode=OneWay}" />
+						</StackPanel>
+					</Border>
+				
+
+			<ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Style="{StaticResource PillBorder}"><TextBlock Text="{x:Bind Vm.Firmware, Mode=OneWay}" /></Border>
+					<Border Style="{StaticResource PillBorder}"><TextBlock Text="{x:Bind Vm.CodecText, Mode=OneWay}" /></Border>
+					<Border Style="{StaticResource PillBorder}"><TextBlock Text="{x:Bind Vm.SampleRateText, Mode=OneWay}" /></Border>
+					<Border Style="{StaticResource PillBorder}" Visibility="{x:Bind Vm.ShowTransport, Mode=OneWay}"><TextBlock Text="{x:Bind Vm.TransportText, Mode=OneWay}" /></Border>
+				</StackPanel>
+			</ScrollViewer>
+		</cp:ColumnPanel>
+	</ScrollViewer>
+	</Grid>
+</Page>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.GattLabPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Momentum5.App.ViewModels">
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<TextBlock Text="BLE GATT lab" Style="{StaticResource PageTitleStyle}" />
+			<TextBlock Text="{x:Bind Vm.Status, Mode=OneWay}" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+			<ProgressBar IsIndeterminate="True" Visibility="{x:Bind BusyVisibility(Vm.IsBusy), Mode=OneWay}" />
+
+			<cp:WrapPanel>
+				<Button Command="{x:Bind Vm.ScanCommand}" ToolTipService.ToolTip="Scan" AutomationProperties.Name="Scan" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE721;" /></Button>
+				<Button Content="Connect" Command="{x:Bind Vm.ConnectCommand}" />
+				<Button Content="Disconnect" Command="{x:Bind Vm.DisconnectCommand}" />
+				<Button Content="Discover" Command="{x:Bind Vm.DiscoverCommand}" />
+				<Button Command="{x:Bind Vm.CancelCommand}" ToolTipService.ToolTip="Cancel" AutomationProperties.Name="Cancel" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE711;" /></Button>
+			</cp:WrapPanel>
+
+			<TextBlock Text="Devices" Style="{StaticResource CardTitleStyle}" />
+			<ListView ItemsSource="{x:Bind Vm.Candidates}" ItemContainerStyle="{StaticResource OutlinedListItemStyle}" SelectedItem="{x:Bind Vm.SelectedCandidate, Mode=TwoWay}" MaxHeight="220">
+				<ListView.ItemTemplate>
+					<DataTemplate x:DataType="vm:CandidateItem">
+						<StackPanel Padding="0,4">
+							<TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextWrapping="Wrap" />
+							<TextBlock Text="{x:Bind AddressText}" IsTextSelectionEnabled="True" FontFamily="Consolas" TextWrapping="Wrap" />
+							<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Detail}" TextWrapping="Wrap" />
+						</StackPanel>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<TextBox Header="Or enter a BLE address (overrides the selection)" PlaceholderText="66:C6:71:65:36:F0" Text="{x:Bind Vm.ManualAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+			<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Vm.ManualAddressHint, Mode=OneWay}" TextWrapping="Wrap" />
+			<TextBlock Text="{x:Bind Vm.ConnectedTitle, Mode=OneWay}" FontWeight="SemiBold" />
+
+			<TextBlock Text="Automated diagnostics" Style="{StaticResource CardTitleStyle}" />
+			<cp:WrapPanel HorizontalSpacing="8" VerticalSpacing="8">
+				<NumberBox Header="Connect cycles" Minimum="0" Maximum="20" Value="{x:Bind Vm.Cycles, Mode=TwoWay}" SpinButtonPlacementMode="Compact" Width="136" />
+				<NumberBox Header="Listen (s)" Minimum="0" Maximum="60" Value="{x:Bind Vm.ListenSeconds, Mode=TwoWay}" SpinButtonPlacementMode="Compact" Width="136" />
+				<CheckBox Content="GAIA probe (read-only)" IsChecked="{x:Bind Vm.GaiaProbe, Mode=TwoWay}" VerticalAlignment="Bottom" />
+				<Button Content="Run diagnostics" Command="{x:Bind Vm.DiagnoseCommand}" Style="{StaticResource PrimaryButtonStyle}" VerticalAlignment="Bottom" />
+				<Button Click="Save_Click" VerticalAlignment="Bottom" ToolTipService.ToolTip="Save report…" AutomationProperties.Name="Save report" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE74E;" /></Button>
+				<Button Command="{x:Bind Vm.CopyReportCommand}" VerticalAlignment="Bottom" ToolTipService.ToolTip="Copy report" AutomationProperties.Name="Copy report" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE8C8;" /></Button>
+			</cp:WrapPanel>
+			<ItemsControl ItemsSource="{x:Bind Vm.Steps}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="vm:StepItem">
+						<Grid ColumnDefinitions="28,*" Padding="0,2">
+							<TextBlock Text="{x:Bind Icon}" />
+							<StackPanel Grid.Column="1">
+								<TextBlock Text="{x:Bind Title}" TextWrapping="Wrap" />
+								<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Detail}" TextWrapping="Wrap" IsTextSelectionEnabled="True" FontFamily="Consolas" />
+							</StackPanel>
+						</Grid>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+			<TextBlock Text="Characteristics" Style="{StaticResource CardTitleStyle}" />
+			<ItemsControl ItemsSource="{x:Bind Vm.Characteristics}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="vm:CharItem">
+						<StackPanel Padding="0,4">
+							<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ServiceName}" FontSize="11" />
+							<TextBlock Text="{x:Bind Title}" TextWrapping="Wrap" />
+							<cp:WrapPanel>
+								<Button Content="Read" Command="{x:Bind ReadCommand}" Visibility="{x:Bind CanRead}" />
+								<Button Content="Subscribe" Command="{x:Bind SubscribeCommand}" Visibility="{x:Bind CanNotify}" />
+							</cp:WrapPanel>
+							<TextBlock Text="{x:Bind Value, Mode=OneWay}" FontFamily="Consolas" IsTextSelectionEnabled="True" TextWrapping="Wrap" />
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+			<TextBlock Text="Notifications (newest first)" Style="{StaticResource CardTitleStyle}" />
+			<ListView ItemsSource="{x:Bind Vm.Notifications}" MaxHeight="220" SelectionMode="None" FontFamily="Consolas" />
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

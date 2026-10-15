@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    xmlns:c="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.SoundPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Momentum5.App.ViewModels">
+
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<TextBlock Text="Sound" Style="{StaticResource PageTitleStyle}" />
+
+			<InfoBar IsOpen="{x:Bind Vm.IsPersonalized, Mode=OneWay}" IsClosable="False" Severity="Informational"
+			         Message="The headset uses a personalized sound profile. It is managed in the phone app and cannot be selected here." />
+
+			<Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+				<ComboBox Header="Sound mode" HorizontalAlignment="Stretch" SelectedIndex="{x:Bind Vm.ModeIndex, Mode=TwoWay}" IsEnabled="{x:Bind Vm.Mode.IsEnabled, Mode=OneWay}">
+					<x:String>Off</x:String>
+					<x:String>Graphic equalizer</x:String>
+					<x:String>Speech clarity</x:String>
+				</ComboBox>
+				<Button Grid.Column="1" Click="Presets_Click" VerticalAlignment="Bottom" ToolTipService.ToolTip="EQ presets" AutomationProperties.Name="EQ presets" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE9E9;" /></Button>
+			</Grid>
+			<c:SwitchRow Title="Bass boost" IsOn="{x:Bind Vm.Bass.Value, Mode=TwoWay}" IsEnabled="{x:Bind Vm.Bass.IsEnabled, Mode=OneWay}" />
+			<TextBlock Text="{x:Bind Vm.Mode.Warning, Mode=OneWay}" Foreground="{ThemeResource SystemFillColorCautionBrush}" TextWrapping="Wrap" />
+
+			<TextBlock Style="{StaticResource CaptionStyle}" Text="Active only in Graphic equalizer mode. Gain in dB, frequency in Hz." TextWrapping="Wrap" />
+			<ItemsControl ItemsSource="{x:Bind Vm.Bands}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<cp:EvenRowPanel MaxItemWidth="72" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="vm:EqBandViewModel">
+						<StackPanel Spacing="4" HorizontalAlignment="Stretch">
+							<TextBlock Text="{x:Bind GainShort, Mode=OneWay}" FontSize="11" HorizontalAlignment="Center" />
+							<Slider Orientation="Vertical" Height="180" Minimum="{x:Bind Min, Mode=OneWay}" Maximum="{x:Bind Max, Mode=OneWay}"
+							        StepFrequency="0.1" SmallChange="0.1" LargeChange="1" HorizontalAlignment="Center"
+							        Value="{x:Bind Gain, Mode=TwoWay}" IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
+							        AutomationProperties.Name="{x:Bind Label, Mode=OneWay}" />
+							<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind ShortLabel, Mode=OneWay}" HorizontalAlignment="Center" FontSize="11" TextWrapping="NoWrap" />
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+			<TextBlock Text="{x:Bind Vm.Warning, Mode=OneWay}" Foreground="{ThemeResource SystemFillColorCautionBrush}" TextWrapping="Wrap" />
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

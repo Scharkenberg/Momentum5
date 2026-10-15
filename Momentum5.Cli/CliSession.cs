@@ -3,6 +3,7 @@ using Momentum5.Core.Settings;
 using Momentum5.Core.Transport;
 using Momentum5.Protocol;
 using Momentum5.Simulation;
+using Momentum5.Transport.Ble;
 using Momentum5.Transport.Rfcomm;
 
 namespace Momentum5.Cli;
@@ -20,8 +21,11 @@ internal sealed class CliSession : IAsyncDisposable
 {
 	private static readonly TimeSpan ConnectTimeout = TimeSpan.FromSeconds(10);
 
-	private CliSession(ConnectionSupervisor supervisor, HeadsetStateStore store, FakeM5? fake)
+	private readonly List<IDisposable> _owned;
+
+	private CliSession(ConnectionSupervisor supervisor, HeadsetStateStore store, FakeM5? fake, List<IDisposable> owned)
 	{
+		_owned = owned;
 		Supervisor = supervisor;
 		Store = store;
 		Fake = fake;
@@ -38,7 +42,7 @@ internal sealed class CliSession : IAsyncDisposable
 
 	public ActiveSession Active => Supervisor.Current ?? throw new CliException(1, "The headset session ended.");
 
-	public static async Task<CliSession> OpenAsync(CliSettings settings, CancellationToken ct)
+	public static async Task<CliSession> OpenAsync(CliSettings settings, CancellationToken ct, bool persistent = false)
 	{
 		var store = new HeadsetStateStore();
 		ILinkTransport transport;
@@ -59,11 +63,25 @@ internal sealed class CliSession : IAsyncDisposable
 				?? throw new CliException(1, "No matching paired device. Use --address (see 'm5ctl list').");
 		}
 
-		var supervisor = new ConnectionSupervisor([transport], store, new SupervisorOptions());
+		var owned = new List<IDisposable>();
+		var options = new SupervisorOptions();
+		if (persistent && !settings.Simulate)
+		{
+			var radio = new BluetoothRadioMonitor();
+			var classic = new ClassicPresence { TargetAddress = target.Address };
+			var adverts = new AdvertisementPresence { TargetAddress = target.Address };
+			owned.AddRange([radio, classic, adverts]);
+			options = new SupervisorOptions { Radio = radio, Presence = classic, Advertisements = adverts };
+			classic.Start();
+			adverts.StartWatching();
+			await classic.WatchTargetAsync(target.Address, ct).ConfigureAwait(false);
+		}
+
+		var supervisor = new ConnectionSupervisor([transport], store, options);
 		var outcome = new TaskCompletionSource<SessionState>(TaskCreationOptions.RunContinuationsAsynchronously);
 		supervisor.StateChanged += (_, state) =>
 		{
-			if (state.Phase is SessionPhase.Ready or SessionPhase.ReadOnly or SessionPhase.Unsupported or SessionPhase.Backoff or SessionPhase.RadioOff)
+			if (state.Phase is SessionPhase.Ready or SessionPhase.ReadOnly or SessionPhase.Unsupported || (!persistent && state.Phase is SessionPhase.Backoff or SessionPhase.RadioOff))
 			{
 				outcome.TrySetResult(state);
 			}
@@ -71,12 +89,17 @@ internal sealed class CliSession : IAsyncDisposable
 		supervisor.SetTarget(target);
 		supervisor.Start();
 
-		var session = new CliSession(supervisor, store, fake);
+		var session = new CliSession(supervisor, store, fake, owned);
 		try
 		{
-			var state = await outcome.Task.WaitAsync(ConnectTimeout, ct).ConfigureAwait(false);
+			var state = await outcome.Task.WaitAsync(persistent ? Timeout.InfiniteTimeSpan : ConnectTimeout, ct).ConfigureAwait(false);
 			if (state.Phase is SessionPhase.Ready or SessionPhase.ReadOnly)
 			{
+				if (!settings.Simulate)
+				{
+					DeviceFinder.Remember(target.Address);
+				}
+
 				return session;
 			}
 
@@ -96,7 +119,14 @@ internal sealed class CliSession : IAsyncDisposable
 		}
 	}
 
-	public ValueTask DisposeAsync() => Supervisor.DisposeAsync();
+	public async ValueTask DisposeAsync()
+	{
+		await Supervisor.DisposeAsync().ConfigureAwait(false);
+		foreach (var item in _owned)
+		{
+			item.Dispose();
+		}
+	}
 }
 
 internal static class DeviceFinder
@@ -122,7 +152,40 @@ internal static class DeviceFinder
 			return byName;
 		}
 
+		if (TryReadLast(out var last) && all.FirstOrDefault(d => d.Address == last) is { } remembered)
+		{
+			return remembered;
+		}
+
 		var connected = all.Where(d => d.IsConnected).ToList();
 		return connected.Count == 1 ? connected[0] : null;
+	}
+
+	private static string LastPath => Path.Combine(ClientPaths.AppData, "last-device.txt");
+
+	public static void Remember(ulong address)
+	{
+		try
+		{
+			Directory.CreateDirectory(ClientPaths.AppData);
+			File.WriteAllText(LastPath, Output.FormatAddress(address));
+		}
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+		{
+			// Best effort only.
+		}
+	}
+
+	internal static bool TryReadLast(out ulong address)
+	{
+		address = 0;
+		try
+		{
+			return File.Exists(LastPath) && Output.TryParseAddress(File.ReadAllText(LastPath).Trim(), out address);
+		}
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+		{
+			return false;
+		}
 	}
 }

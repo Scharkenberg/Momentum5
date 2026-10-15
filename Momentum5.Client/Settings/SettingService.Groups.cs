@@ -29,6 +29,7 @@ public sealed partial class SettingService
 		if (group == SettingGroup.Eq)
 		{
 			await RefreshBandFrequenciesAsync(session, ct).ConfigureAwait(false);
+			await RefreshPeqBandParamsAsync(session, ct).ConfigureAwait(false);
 		}
 	}
 
@@ -137,6 +138,41 @@ public sealed partial class SettingService
 			{
 				await TryFetchAsync(session, freq, band, ct).ConfigureAwait(false);
 			}
+		}
+	}
+
+	/// <summary>
+	/// X-04 read-dump: per-band Q (100D) and filter type (100F), fetched only while missing — the keys are
+	/// read-only, so a landed value never needs re-reading. Rejections are logged and removed by
+	/// <see cref="TryFetchAsync"/>; the parametric-EQ page latches the unsupported case (error 00/01) from
+	/// its own per-band reads because this path never rethrows.
+	/// </summary>
+	private async Task RefreshPeqBandParamsAsync(ActiveSession session, CancellationToken ct)
+	{
+		var config = store.Current.Get(Keys.EqConfig);
+		if (config is null)
+		{
+			return;
+		}
+
+		foreach (var key in BandParamKeys(config.Bands))
+		{
+			var binding = GaiaCatalog.Registry.ByName(key.Name);
+			if (binding is null || store.Current.TryGet(key, out _))
+			{
+				continue;
+			}
+
+			await TryFetchAsync(session, binding, key.Index, ct).ConfigureAwait(false);
+		}
+	}
+
+	private static IEnumerable<SettingKey<int>> BandParamKeys(int bands)
+	{
+		for (var band = 0; band < bands; band++)
+		{
+			yield return Keys.EqBandQ(band);
+			yield return Keys.EqBandFilterType(band);
 		}
 	}
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    xmlns:cp="using:Momentum5.App.Controls"
+    x:Class="Momentum5.App.Pages.SoundPresetsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Momentum5.App.ViewModels">
+
+	<ScrollViewer>
+		<cp:ColumnPanel Style="{StaticResource PageColumn}">
+			<StackPanel Orientation="Horizontal" Spacing="8">
+				<Button Click="Back_Click" ToolTipService.ToolTip="← Sound" AutomationProperties.Name="← Sound" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE72B;" /></Button>
+				<TextBlock Text="EQ presets" Style="{StaticResource PageTitleStyle}" VerticalAlignment="Center" />
+			</StackPanel>
+
+			<ListView ItemsSource="{x:Bind Vm.Items}" ItemContainerStyle="{StaticResource OutlinedListItemStyle}" SelectedItem="{x:Bind Vm.Selected, Mode=TwoWay}" SelectionMode="Single"
+			          AutomationProperties.Name="EQ presets" MaxHeight="360">
+				<ListView.ItemTemplate>
+					<DataTemplate x:DataType="vm:PresetItem">
+						<StackPanel Padding="0,6" Spacing="2">
+							<TextBlock Text="{x:Bind Name}" FontWeight="SemiBold" />
+							<TextBlock Style="{StaticResource CaptionStyle}" Text="{x:Bind Summary}" FontSize="12" TextWrapping="Wrap" />
+						</StackPanel>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+			<Button Content="Apply selected" Command="{x:Bind Vm.ApplyCommand}" Style="{StaticResource PrimaryButtonStyle}" />
+
+			<TextBox Header="Name" PlaceholderText="Preset name" Text="{x:Bind Vm.NameInput, Mode=TwoWay}" MaxLength="60" />
+			<cp:WrapPanel>
+				<Button Command="{x:Bind Vm.SaveCurrentCommand}" ToolTipService.ToolTip="Save current EQ as new preset" AutomationProperties.Name="Save current EQ as new preset" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE74E;" /></Button>
+				<Button Command="{x:Bind Vm.RenameCommand}" ToolTipService.ToolTip="Rename selected" AutomationProperties.Name="Rename selected" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE70F;" /></Button>
+				<Button Command="{x:Bind Vm.DeleteCommand}" ToolTipService.ToolTip="Delete selected" AutomationProperties.Name="Delete selected" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE74D;" /></Button>
+			</cp:WrapPanel>
+
+			<cp:WrapPanel>
+				<Button Click="ExportFile_Click" ToolTipService.ToolTip="Export to file…" AutomationProperties.Name="Export to file" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE898;" /></Button>
+				<Button Click="ImportFile_Click" ToolTipService.ToolTip="Import from file…" AutomationProperties.Name="Import from file" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE896;" /></Button>
+				<Button Click="CopyJson_Click" ToolTipService.ToolTip="Copy JSON" AutomationProperties.Name="Copy JSON" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE8C8;" /></Button>
+				<Button Click="PasteJson_Click" ToolTipService.ToolTip="Paste JSON" AutomationProperties.Name="Paste JSON" Style="{StaticResource IconButtonStyle}"><FontIcon Glyph="&#xE77F;" /></Button>
+			</cp:WrapPanel>
+			<TextBlock Style="{StaticResource CaptionStyle}" Text="Export uses the selected preset, or all of yours when none is selected." TextWrapping="Wrap" />
+			<TextBlock Text="{x:Bind Vm.Message, Mode=OneWay}" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+		</cp:ColumnPanel>
+	</ScrollViewer>
+</Page>

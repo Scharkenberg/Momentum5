@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Momentum5.Core.Transport;
 using Windows.Devices.Bluetooth.Advertisement;
 
@@ -69,6 +70,13 @@ public sealed class AdvertisementPresence(TimeProvider? time = null) : IAdvertis
 	{
 		var name = args.Advertisement.LocalName;
 		var address = args.BluetoothAddress;
+		if (TrySwiftPair(args.Advertisement, out var classic) && TargetAddress == classic)
+		{
+			// Pairing-mode beacon: the BLE address is a rotating private address, the payload carries the stable classic address.
+			address = classic;
+			name = "[pairing mode]";
+		}
+
 		var relevant = (TargetAddress is { } target && target == address)
 			|| name.StartsWith("LE-MOMENTUM 5", StringComparison.OrdinalIgnoreCase)
 			|| name.Contains("MOMENTUM", StringComparison.OrdinalIgnoreCase);
@@ -86,5 +94,34 @@ public sealed class AdvertisementPresence(TimeProvider? time = null) : IAdvertis
 
 		_lastRaised[address] = now;
 		Sighted?.Invoke(this, new AdvertisementSighting(address, string.IsNullOrEmpty(name) ? null : name, args.RawSignalStrengthInDBm, now));
+	}
+
+	/// <summary>Microsoft Swift Pair beacon (company 0x0006): <c>03 01 rssi</c> + classic address (little-endian) + class of device.</summary>
+	public static bool TrySwiftPair(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisement advertisement, out ulong classicAddress)
+	{
+		ArgumentNullException.ThrowIfNull(advertisement);
+		classicAddress = 0;
+		foreach (var section in advertisement.ManufacturerData)
+		{
+			if (section.CompanyId != 0x0006)
+			{
+				continue;
+			}
+
+			var d = section.Data.ToArray();
+			if (d.Length < 9 || d[0] != 0x03 || d[1] != 0x01)
+			{
+				continue;
+			}
+
+			for (var i = 0; i < 6; i++)
+			{
+				classicAddress |= (ulong)d[3 + i] << (8 * i);
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 }

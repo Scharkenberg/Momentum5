@@ -16,6 +16,13 @@ var root = new RootCommand("m5ctl - MOMENTUM 5 Wireless control")
 	GetSet.Eq(g),
 	GetSet.KeysCommand(g),
 	Matrix.Build(g),
+	SelfTest.Build(g),
+	Diagnostics.Presence(g),
+	Diagnostics.BatteryCheck(g),
+	Diagnostics.Ble(g),
+	Diagnostics.HfpDump(g),
+	Gatt.Build(g),
+	Multipoint.Build(g),
 };
 foreach (var option in g.All)
 {

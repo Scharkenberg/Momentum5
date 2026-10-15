@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Momentum5.App.Controls.CompactView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Momentum5.App.Controls">
+	<UserControl.Resources>
+		<!-- Density overrides: every page hosted here (and the shared controls) renders tighter -->
+		<Thickness x:Key="CardPadding">10</Thickness>
+		<Thickness x:Key="PageMargin">6,2,8,10</Thickness>
+		<x:Double x:Key="PageSpacing">8</x:Double>
+		<x:Double x:Key="PageTitleFontSize">18</x:Double>
+		<x:Double x:Key="CardTitleFontSize">14</x:Double>
+		<x:Double x:Key="RowMinHeight">32</x:Double>
+		<x:Double x:Key="ControlHeight">26</x:Double>
+		<Thickness x:Key="ControlPadding">8,0</Thickness>
+		<Thickness x:Key="ListItemPadding">8,1</Thickness>
+		<x:Double x:Key="ControlFontSize">12</x:Double>
+		<x:Double x:Key="IconGlyphSize">14</x:Double>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- Header: identity, battery, link state, connect, (flyout only) open full app -->
+		<Border x:Name="HeaderCard" Margin="8,8,8,8" Padding="10,6" CornerRadius="{StaticResource RadiusM}" Background="{StaticResource HeroGradientBrush}">
+			<Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
+				<StackPanel Spacing="0" VerticalAlignment="Center">
+					<TextBlock Text="{x:Bind Vm.HeadsetName, Mode=OneWay}" FontSize="14" FontWeight="SemiBold" Foreground="White" TextTrimming="CharacterEllipsis" />
+					<Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
+						<c:BatteryIcon Percent="{x:Bind Vm.BatteryPercent, Mode=OneWay}" Charging="{x:Bind Vm.IsCharging, Mode=OneWay}" HasValue="{x:Bind Vm.HasBattery, Mode=OneWay}" Foreground="White" VerticalAlignment="Center" />
+						<TextBlock Grid.Column="1" Text="{x:Bind Vm.BatteryLine, Mode=OneWay}" Foreground="White" FontSize="12" VerticalAlignment="Center" />
+						<TextBlock Grid.Column="2" Text="{x:Bind Vm.Status.PhaseText, Mode=OneWay}" Foreground="#D9FFFFFF" FontSize="12" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+					</Grid>
+				</StackPanel>
+				<StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+					<Button Click="Connect_Click" Style="{StaticResource SubtleButtonStyle}" MinHeight="28" MinWidth="28" Height="28" Width="28" Padding="0"
+					        Foreground="White" ToolTipService.ToolTip="Connect / disconnect" AutomationProperties.Name="Connect or disconnect">
+						<FontIcon Glyph="&#xE702;" FontSize="16" />
+					</Button>
+					<Button x:Name="OpenFullButton" Visibility="Collapsed" Click="OpenFull_Click" Style="{StaticResource SubtleButtonStyle}" MinHeight="28" MinWidth="28" Height="28" Width="28" Padding="0"
+					        Foreground="White" ToolTipService.ToolTip="Open full app" AutomationProperties.Name="Open full app">
+						<FontIcon Glyph="&#xE8A7;" FontSize="16" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<!-- Icon rail: every section of the app -->
+			<ListView x:Name="Rail" SelectionMode="Single" SelectedIndex="0" SelectionChanged="Rail_SelectionChanged" Padding="0" Width="44"
+			          ScrollViewer.VerticalScrollBarVisibility="Hidden" AutomationProperties.Name="Sections">
+				<ListView.ItemContainerStyle>
+					<Style TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItemStyle}">
+						<Setter Property="MinHeight" Value="34" />
+						<Setter Property="MinWidth" Value="0" />
+						<Setter Property="Padding" Value="0" />
+						<Setter Property="Margin" Value="2,1" />
+						<Setter Property="HorizontalContentAlignment" Value="Center" />
+						<Setter Property="VerticalContentAlignment" Value="Center" />
+					</Style>
+				</ListView.ItemContainerStyle>
+				<ListViewItem Tag="Home" ToolTipService.ToolTip="Quick controls" AutomationProperties.Name="Quick controls"><FontIcon Glyph="&#xE80F;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Noise" ToolTipService.ToolTip="Noise control" AutomationProperties.Name="Noise control"><FontIcon Glyph="&#xE767;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Sound" ToolTipService.ToolTip="Sound" AutomationProperties.Name="Sound"><FontIcon Glyph="&#xE8D6;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Spatial" ToolTipService.ToolTip="Immersive audio" AutomationProperties.Name="Immersive audio"><FontIcon Glyph="&#xE774;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Connections" ToolTipService.ToolTip="Headset link" AutomationProperties.Name="Headset link"><FontIcon Glyph="&#xE702;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Multipoint" ToolTipService.ToolTip="Connection management" AutomationProperties.Name="Connection management"><FontIcon Glyph="&#xE7F8;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="DeviceSettings" ToolTipService.ToolTip="Device settings" AutomationProperties.Name="Device settings"><FontIcon Glyph="&#xE7F6;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Diagnostics" ToolTipService.ToolTip="Diagnostics" AutomationProperties.Name="Diagnostics"><FontIcon Glyph="&#xE9D9;" FontSize="16" /></ListViewItem>
+				<ListViewItem x:Name="AdvancedRailItem" Tag="Advanced" Visibility="Collapsed" ToolTipService.ToolTip="Advanced" AutomationProperties.Name="Advanced"><FontIcon Glyph="&#xE90F;" FontSize="16" /></ListViewItem>
+				<ListViewItem Tag="Settings" ToolTipService.ToolTip="Settings" AutomationProperties.Name="Settings"><FontIcon Glyph="&#xE713;" FontSize="16" /></ListViewItem>
+			</ListView>
+
+			<ScrollViewer x:Name="HomeScroll" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="4,0,8,0">
+				<c:CompactHome x:Name="Home" Vm="{x:Bind Vm}" Presets="{x:Bind Presets}" />
+			</ScrollViewer>
+			<Frame x:Name="PageFrame" Grid.Column="1" Margin="4,0,0,0" Visibility="Collapsed" />
+		</Grid>
+	</Grid>
+</UserControl>

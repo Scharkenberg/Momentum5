@@ -138,47 +138,56 @@ internal static class StatusCommands
 
 	public static Command Watch(GlobalOptions g)
 	{
-		var command = new Command("watch", "Print live push notifications until Ctrl+C (the simulator ticks the battery).");
+		var command = new Command("watch", "Print live pushes and session state changes until Ctrl+C. Survives power-cycles and reconnects.");
 		command.SetAction((result, ct) => Runner.RunAsync(async () =>
 		{
 			var s = g.Read(result);
-			await using var session = await CliSession.OpenAsync(s, ct).ConfigureAwait(false);
-			var hub = session.Active.Hub;
-			hub.SettingChanged += (_, n) => Console.WriteLine(s.Json
-				? Output.Json(w =>
+			Emit(s, "state", "waiting for headset", w => w.WriteString("phase", "Connecting"));
+			await using var session = await CliSession.OpenAsync(s, ct, persistent: true).ConfigureAwait(false);
+
+			NotificationHub? attached = null;
+			var gate = new Lock();
+			void Attach(ActiveSession active)
+			{
+				lock (gate)
 				{
-					w.WriteStartObject();
-					w.WriteString("event", "changed");
+					if (ReferenceEquals(active.Hub, attached))
+					{
+						return;
+					}
+
+					attached = active.Hub;
+				}
+
+				active.Hub.SettingChanged += (_, n) => Emit(s, "changed", $"{Output.Key(n.Name, n.Index)} = {Output.Text(n.Value)}", w =>
+				{
 					w.WriteString("key", n.Name);
 					w.WriteNumber("index", n.Index);
 					w.WritePropertyName("value");
 					Output.WriteJson(w, n.Value);
-					w.WriteEndObject();
-				})
-				: $"{Output.Key(n.Name, n.Index)} = {Output.Text(n.Value)}");
-			hub.UnknownReceived += (_, n) => Console.WriteLine(s.Json
-				? Output.Json(w =>
+				});
+				active.Hub.UnknownReceived += (_, n) => Emit(s, "unknown", $"? {n.Vendor}:{n.Command:X4} {GaiaFormatter.Hex(n.Payload.Span)}", w =>
 				{
-					w.WriteStartObject();
-					w.WriteString("event", "unknown");
 					w.WriteString("vendor", n.Vendor.ToString());
 					w.WriteString("command", n.Command.ToString("X4", CultureInfo.InvariantCulture));
 					w.WriteString("payload", Convert.ToHexString(n.Payload.Span));
-					w.WriteEndObject();
-				})
-				: $"? {n.Vendor}:{n.Command:X4} {GaiaFormatter.Hex(n.Payload.Span)}");
+				});
+			}
 
-			var lost = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-			session.Supervisor.StateChanged += (_, state) =>
-			{
-				if (state.Phase is not (SessionPhase.Ready or SessionPhase.ReadOnly))
-				{
-					lost.TrySetResult();
-				}
-			};
+			session.Supervisor.StateChanged += (_, st) => Emit(s, "state", $"# {st.Phase}{(st.Detail is null ? string.Empty : " - " + st.Detail)}", w => w.WriteString("phase", st.Phase.ToString()));
+			session.Supervisor.SessionReady += (_, active) => Attach(active);
+			Emit(s, "state", $"# {session.Supervisor.State.Phase}", w => w.WriteString("phase", session.Supervisor.State.Phase.ToString()));
+			Attach(session.Active);
 
 			var tick = s.Simulate && session.Fake is not null ? SimulatorTickAsync(session, ct) : Task.CompletedTask;
-			await Task.WhenAny(lost.Task, Task.Delay(Timeout.Infinite, ct)).ConfigureAwait(false);
+			try
+			{
+				await Task.Delay(Timeout.Infinite, ct).ConfigureAwait(false);
+			}
+			catch (OperationCanceledException)
+			{
+			}
+
 			try
 			{
 				await tick.ConfigureAwait(false);
@@ -187,14 +196,22 @@ internal static class StatusCommands
 			{
 			}
 
-			if (ct.IsCancellationRequested)
-			{
-				return 0;
-			}
-
-			throw new CliException(1, "The headset session ended.");
+			return 0;
 		}));
 		return command;
+	}
+
+	private static void Emit(CliSettings s, string kind, string text, Action<System.Text.Json.Utf8JsonWriter> json)
+	{
+		Console.WriteLine(s.Json
+			? Output.Json(w =>
+			{
+				w.WriteStartObject();
+				w.WriteString("event", kind);
+				json(w);
+				w.WriteEndObject();
+			})
+			: text);
 	}
 
 	private static async Task SimulatorTickAsync(CliSession session, CancellationToken ct)

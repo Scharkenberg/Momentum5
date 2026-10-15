@@ -293,6 +293,18 @@ public sealed partial class FakeM5
 			return [Ok(frame, frame.Vendor == GaiaVendor.Qualcomm ? QualcommFeatures : SennheiserFeatures)];
 		}
 
+		// X-06: raw SET 1403 forgets the primed pairing at [i] (entry removed + 1484 status push).
+		if (frame.Vendor == GaiaVendor.Sennheiser && cmd == 0x1403)
+		{
+			return ForgetPairing(frame, payload);
+		}
+
+		// X-08: raw SET 0040 factory-resets: ACK, paired state cleared, the device power-cycles.
+		if (frame.Vendor == GaiaVendor.Sennheiser && cmd == 0x0040)
+		{
+			return FactoryReset(frame);
+		}
+
 		var candidates = GaiaCatalog.Registry.ByCommand(frame.Vendor, cmd);
 		var getters = candidates.Where(b => b.GetCmd is { } g && GaiaWord.AsCommand(g) == cmd).ToList();
 		if (getters.Count > 0)
@@ -362,6 +374,58 @@ public sealed partial class FakeM5
 		}
 
 		return [Error(frame, ReasonMalformed)];
+	}
+
+	/// <summary>X-06: forget pairing <paramref name="payload"/>[0]; removes the primed entry and pushes 1484.</summary>
+	private List<GaiaFrame> ForgetPairing(GaiaFrame frame, ReadOnlySpan<byte> payload)
+	{
+		if (_options.RefuseWrites)
+		{
+			return [Error(frame, ReasonOperation)];
+		}
+
+		if (payload.Length < 1)
+		{
+			return [Error(frame, ReasonMalformed)];
+		}
+
+		var index = payload[0];
+		if (!_state.ContainsKey(("PairedInfo", index)))
+		{
+			return [Error(frame, ReasonIndex)];
+		}
+
+		_state.Remove(("PairedInfo", index));
+		if (_state.TryGetValue(("PairedCount", -1), out var count) && count is byte c && c > 0)
+		{
+			_state[("PairedCount", -1)] = (byte)(c - 1);
+		}
+
+		List<GaiaFrame> frames = [Ok(frame, [])];
+		if (_registered.Contains((GaiaVendor.Sennheiser, (byte)(0x1484 >> 9))))
+		{
+			frames.Add(new GaiaFrame(GaiaVendor.Sennheiser, GaiaWord.NotificationOf(0x1484), new byte[] { (byte)index, 0 }));
+		}
+
+		return frames;
+	}
+
+	/// <summary>X-08: factory reset; every primed pairing disappears and the device power-cycles.</summary>
+	private List<GaiaFrame> FactoryReset(GaiaFrame frame)
+	{
+		if (_options.RefuseWrites)
+		{
+			return [Error(frame, ReasonOperation)];
+		}
+
+		foreach (var key in _state.Keys.Where(k => k.Name == "PairedInfo" || k.Name == "PairedStatus").ToList())
+		{
+			_state.Remove(key);
+		}
+
+		_state[("PairedCount", -1)] = (byte)0;
+		PowerCycle();
+		return [Ok(frame, [])];
 	}
 
 	private List<GaiaFrame> Pushes(IEnumerable<ISettingBinding> changed)

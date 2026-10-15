@@ -43,7 +43,7 @@ public static class RawCommands
 		new("FirmwareUpgrade1", S, 0x0201, SafetyClass.Blocked, "X-12 only"),
 
 		// Hazards (semantics unknown) and factory reset
-		new("FactoryReset", S, 0x0040, SafetyClass.Blocked, "X-06"),
+		new("FactoryReset", S, 0x0040, SafetyClass.Dangerous, "X-08: typed RESET + checkbox + consent token"),
 		new("Hazard0607", S, 0x0607, SafetyClass.Blocked),
 		new("Hazard0613", S, 0x0613, SafetyClass.Blocked),
 		new("Hazard0685", S, 0x0685, SafetyClass.Blocked, "notification-typed word"),
@@ -54,19 +54,22 @@ public static class RawCommands
 		new("DfuFamily4", S, 0x0634, SafetyClass.Dangerous),
 
 		// Connection management / MMI
+		new("ConnectionsCurrent", S, 0x1413, SafetyClass.Read, "M5 by-MAC family: reply 1513 = 6 B"),
+		new("ConnectionsList", S, 0x140D, SafetyClass.Read, "reply 150D"),
+		new("ConnectionsRecord", S, 0x140E, SafetyClass.Read, "selector [mac]; reply 150E [mac][flags 3B][name]"),
+		new("ConnectionsStatus", S, 0x1414, SafetyClass.Read, "reply 1514 = 7 B"),
 		new("ForgetA", S, 0x1403, SafetyClass.Dangerous, "semantics unknown until R-02"),
 		new("ForgetB", S, 0x1405, SafetyClass.Dangerous, "semantics unknown until R-02"),
 		new("ForgetC", S, 0x1406, SafetyClass.Dangerous, "semantics unknown until R-02"),
 		new("MmiConfigSet", S, 0x1600, SafetyClass.Gated),
-		new("MmiConfigGet", S, 0x1601, SafetyClass.Read),
-		new("MmiConfig2", S, 0x1605, SafetyClass.Read),
 		new("MmiReset", S, 0x1604, SafetyClass.Blocked),
+		// MmiConfigGet (1601) and MmiConfig2 (1605) moved to typed bindings in
+		// MmiBindings.cs with X-05 (raw rows exist only for words without a typed binding).
 
-		// Sound extras (read only)
+		// Sound extras (read only); EqBandQ (100D) and EqBandFilterType (100F) moved to typed
+		// bindings in EqBindings.cs with X-04 (raw rows exist only for words without a typed binding).
 		new("PromptLanguageAvailable", S, 0x0808, SafetyClass.Read),
 		new("PromptLanguageVersions", S, 0x0809, SafetyClass.Read),
-		new("EqBandQ", S, 0x100D, SafetyClass.Read),
-		new("EqBandFilterType", S, 0x100F, SafetyClass.Read),
 
 		// Unknown (DevTools probing only)
 		new("Unknown0813", S, 0x0813, SafetyClass.Unknown),

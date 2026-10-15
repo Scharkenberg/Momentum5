@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Momentum5.App.Pages.Advanced.FirmwarePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cp="using:Momentum5.App.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Padding="{ThemeResource PageMargin}"
+            Spacing="{ThemeResource PageSpacing}"
+            MaxWidth="1000"
+            HorizontalAlignment="Stretch">
+
+            <!-- Persistent warning: the destructive scope of the page (house style: top InfoBar) -->
+            <InfoBar
+                AutomationProperties.Name="Firmware update risk warning"
+                IsClosable="False"
+                IsOpen="True"
+                Severity="Warning"
+                Title="Can brick the headphones"
+                Message="A failed or interrupted firmware update can leave the headphones unusable. Keep the battery above the 30 % floor and read docs/recovery.md before you start." />
+
+            <TextBlock
+                Text="{x:Bind ViewModel.Warning, Mode=OneWay}"
+                Visibility="{x:Bind WarningVis(ViewModel.Warning), Mode=OneWay}"
+                Style="{ThemeResource BaseTextBlockStyle}"
+                Foreground="{ThemeResource StatusBadBrush}"
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                Text="{x:Bind ViewModel.StatusNote, Mode=OneWay}"
+                Visibility="{x:Bind TextVis(ViewModel.StatusNote), Mode=OneWay}"
+                Style="{ThemeResource BaseTextBlockStyle}"
+                Foreground="{ThemeResource StatusGoodBrush}"
+                TextWrapping="Wrap" />
+
+            <!-- Link-loss / failure recovery bar (X-02 RecoveryInfo helper, driven from code-behind) -->
+            <InfoBar x:Name="RecoveryBar" AutomationProperties.Name="Firmware update recovery guidance" />
+
+            <!-- Stage 0: check (X-09) -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Check for updates" Style="{StaticResource CardTitleStyle}" />
+                    <TextBlock
+                        Text="Reads the device firmware (GAIA 0x1201) and queries the Sennheiser update metadata. Read-only — nothing is sent to the headphones."
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.SessionText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.CurrentVersionText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}" />
+                    <Button
+                        Content="Check for updates"
+                        HorizontalAlignment="Left"
+                        Click="OnCheckClick"
+                        IsEnabled="{x:Bind CanCheck(ViewModel.IsChecking), Mode=OneWay}"
+                        AutomationProperties.Name="Check for firmware updates"
+                        ToolTipService.ToolTip="Queries the update metadata (X-09) — no bytes are sent to the headphones." />
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Visibility="{x:Bind BusyVis(ViewModel.IsChecking), Mode=OneWay}"
+                        AutomationProperties.Name="Checking for firmware updates" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.CheckResultText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.CheckResultText), Mode=OneWay}"
+                        Style="{ThemeResource BodyStrongTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.LatestVersionText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.PackageSizeText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.PackageUrlText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.PackageUrlText), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Stage 1: prepare (X-10) -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Prepare the package" Style="{StaticResource CardTitleStyle}" />
+                    <TextBlock
+                        Text="Downloads the encrypted package, decrypts it (AES-CTR), unzips it and verifies the MD5 digest before the image is staged in the local cache. Nothing reaches the headphones in this stage."
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Content="Download and verify package"
+                        HorizontalAlignment="Left"
+                        Click="OnPrepareClick"
+                        IsEnabled="{x:Bind CanPrepare(ViewModel.UpdateAvailable, ViewModel.HasPackage, ViewModel.IsPreparing), Mode=OneWay}"
+                        AutomationProperties.Name="Download, decrypt and verify the firmware package"
+                        ToolTipService.ToolTip="X-10 pipeline: download → AES-CTR decrypt → ZIP → MD5 gate → cache." />
+                    <TextBlock
+                        Text="Check for updates first — the download needs a package URL from the metadata."
+                        Visibility="{x:Bind NotAvailableVis(ViewModel.HasPackage), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <ProgressBar
+                        IsIndeterminate="True"
+                        Visibility="{x:Bind BusyVis(ViewModel.IsPreparing), Mode=OneWay}"
+                        AutomationProperties.Name="Preparing the firmware package" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.PrepareFailureText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.PrepareFailureText), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource StatusBadBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Stage 2: review -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Review" Style="{StaticResource CardTitleStyle}" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.ReviewVersionsText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                    <HyperlinkButton
+                        Content="Open the release notes"
+                        NavigateUri="{x:Bind ViewModel.ChangelogUri, Mode=OneWay}"
+                        MinHeight="{ThemeResource RowMinHeight}"
+                        Visibility="{x:Bind TextVis(ViewModel.ChangelogUrlText), Mode=OneWay}"
+                        AutomationProperties.Name="Open the firmware release notes" />
+                    <TextBlock
+                        Text="No changelog link was published for this release."
+                        Visibility="{x:Bind EmptyTextVis(ViewModel.ChangelogUrlText), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.ReviewPackageText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.ReviewPackageText), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="No verified package is staged yet."
+                        Visibility="{x:Bind NotAvailableVis(ViewModel.Prepared), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Stage 3: battery gate + typed consent + execute (X-11) -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="{StaticResource InnerSpacing}">
+                    <TextBlock Text="Battery, consent and start" Style="{StaticResource CardTitleStyle}" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.BatteryText, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="Starting the update opens a typed-confirmation dialog locked for five seconds. You must type the phrase exactly: I understand this can brick my headphones."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Content="Start firmware update…"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Click="OnBeginUpdateClick"
+                        IsEnabled="{x:Bind CanBegin(ViewModel.IsConnected, ViewModel.Prepared, ViewModel.BatteryOk, ViewModel.IsExecuting, ViewModel.ProfileHasTunnel), Mode=OneWay}"
+                        AutomationProperties.Name="Start the firmware update (opens a typed-confirmation dialog)"
+                        ToolTipService.ToolTip="Opens the typed-phrase consent dialog (X-02); the flash itself runs through the X-11 upgrade session (Q:0C00–0C03, Dangerous)." />
+                    <TextBlock
+                        Text="Connect the headphones in Windows first, then open this page."
+                        Visibility="{x:Bind NotConnectedVis(ViewModel.IsConnected), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.PhaseText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.PhaseText), Mode=OneWay}"
+                        Style="{ThemeResource BodyStrongTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                    <ProgressBar
+                        Minimum="0"
+                        Maximum="1"
+                        Value="{x:Bind ViewModel.TransferProgress, Mode=OneWay}"
+                        Visibility="{x:Bind BusyVis(ViewModel.IsExecuting), Mode=OneWay}"
+                        AutomationProperties.Name="Firmware transfer progress" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.TransferText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.TransferText), Mode=OneWay}"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Button
+                        Content="Abort update"
+                        HorizontalAlignment="Left"
+                        Click="OnAbortClick"
+                        IsEnabled="{x:Bind CanAbort(ViewModel.IsExecuting), Mode=OneWay}"
+                        AutomationProperties.Name="Abort the in-flight firmware update"
+                        ToolTipService.ToolTip="Sends the best-effort VMU abort sequence (UPGRADE_ABORT_REQ) and disconnects the tunnel." />
+                </StackPanel>
+            </Border>
+
+            <!-- Stage 4: result + recovery guidance -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Result and recovery" Style="{StaticResource CardTitleStyle}" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.ResultText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.ResultText), Mode=OneWay}"
+                        Style="{ThemeResource BaseTextBlockStyle}"
+                        Foreground="{ThemeResource StatusGoodBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.FailureText, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.FailureText), Mode=OneWay}"
+                        Style="{ThemeResource BaseTextBlockStyle}"
+                        Foreground="{ThemeResource StatusBadBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="{x:Bind ViewModel.RecoveryHint, Mode=OneWay}"
+                        Visibility="{x:Bind TextVis(ViewModel.RecoveryHint), Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <Button
+                        Content="Resume update…"
+                        HorizontalAlignment="Left"
+                        Visibility="{x:Bind BoolToVis(ViewModel.Resumable), Mode=OneWay}"
+                        IsEnabled="{x:Bind CanResumeUpdate(ViewModel.Resumable, ViewModel.IsExecuting, ViewModel.IsConnected), Mode=OneWay}"
+                        Click="OnResumeClick"
+                        AutomationProperties.Name="Resume the interrupted firmware update (opens a typed-confirmation dialog)"
+                        ToolTipService.ToolTip="Re-runs the typed-phrase consent dialog, then continues the interrupted transfer at the device's resume point." />
+                </StackPanel>
+            </Border>
+
+            <!-- Notes -->
+            <Border
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="{StaticResource RadiusL}"
+                Padding="{ThemeResource CardPadding}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Notes" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                    <TextBlock
+                        Text="The flash words are Q:0C00–0C03 (Qualcomm, Dangerous class) — every frame needs a single-use consent token, and the typed dialog opens the window. The version read is S:1201 (Read class)."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="The battery must be above the 30 % floor — this page refuses to start, and the headphones re-check in UPGRADE_START_CFM (ERROR_BATTERY_LOW)."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="This page needs DevMode — the whole Advanced area is DevMode-gated at the shell level."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="The update-metadata request format and the exact VMU sequence are reconstructions (R-06 capture pending, X-12 replay blocked on it) — the first flash round on real hardware is still pending."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Text="If an update fails or the headphones end up bricked, follow docs/recovery.md (20-second button reset, re-flash via the official Smart Control Plus app, frame-log collection)."
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
