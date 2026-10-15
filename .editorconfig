@@ -23,3 +23,10 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggest
 dotnet_diagnostic.CA1852.severity = suggestion
 dotnet_diagnostic.CA1008.severity = none
 dotnet_diagnostic.CA1028.severity = none
+dotnet_diagnostic.CA1016.severity = none
+dotnet_diagnostic.CA1819.severity = none
+dotnet_diagnostic.CA1000.severity = none
+dotnet_diagnostic.CA1305.severity = none
+
+[Momentum5.Tests/**.cs]
+dotnet_diagnostic.CA1707.severity = none

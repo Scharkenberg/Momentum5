@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(WinTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <AssemblyName>m5ctl</AssemblyName>
+    <RootNamespace>Momentum5.Cli</RootNamespace>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Momentum5.Core\Momentum5.Core.csproj" />
+    <ProjectReference Include="..\Momentum5.Protocol\Momentum5.Protocol.csproj" />
+    <ProjectReference Include="..\Momentum5.Client\Momentum5.Client.csproj" />
+    <ProjectReference Include="..\Momentum5.Simulation\Momentum5.Simulation.csproj" />
+    <ProjectReference Include="..\Momentum5.Transport.Rfcomm\Momentum5.Transport.Rfcomm.csproj" />
+  </ItemGroup>
+
+</Project>

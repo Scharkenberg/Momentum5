@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Momentum5.Core\Momentum5.Core.csproj" />
+    <ProjectReference Include="..\Momentum5.Protocol\Momentum5.Protocol.csproj" />
+  </ItemGroup>
+
+</Project>

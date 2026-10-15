@@ -35,4 +35,8 @@ public enum TrustTier
 
 public sealed record SetResult<T>(bool Verified, T Actual);
 
-public sealed record SessionInfo(string Model, string Firmware, string Serial, TrustTier Trust, string TransportId);
+public sealed record SessionInfo(string Model, string Firmware, string Serial, TrustTier Trust, string TransportId)
+{
+	/// <summary>Feature ids reported by the headset (e.g. "S:0A v4"); empty when the query failed.</summary>
+	public IReadOnlyList<string> Features { get; init; } = [];
+}

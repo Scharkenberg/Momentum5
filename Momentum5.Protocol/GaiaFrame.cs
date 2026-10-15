@@ -29,7 +29,9 @@ public readonly record struct GaiaFrame(GaiaVendor Vendor, ushort Command, ReadO
 	{
 		if (Payload.Length > MaxPayloadLength)
 		{
+#pragma warning disable CA2208 // property name is the meaningful argument
 			throw new ArgumentOutOfRangeException(nameof(Payload), Payload.Length, "GAIA payload exceeds 65535 bytes.");
+#pragma warning restore CA2208
 		}
 
 		destination[0] = 0xFF;

@@ -17,6 +17,9 @@ public sealed class HeadsetSnapshot
 
 	public int Count => _values.Count;
 
+	/// <summary>All stored values keyed by (name, index); for status dumps and diagnostics.</summary>
+	public IEnumerable<KeyValuePair<(string Name, int Index), object>> Entries => _values;
+
 	public T? Get<T>(SettingKey<T> key) =>
 		_values.TryGetValue((key.Name, key.Index), out var v) && v is T t ? t : default;
 
@@ -42,6 +45,22 @@ public sealed class HeadsetSnapshot
 		{
 			copy[(key.Name, key.Index)] = value;
 		}
+		return new HeadsetSnapshot(copy, Session);
+	}
+
+	public HeadsetSnapshot WithValue(string name, int index, object? value)
+	{
+		ArgumentNullException.ThrowIfNull(name);
+		var copy = new Dictionary<(string, int), object>(_values);
+		if (value is null)
+		{
+			copy.Remove((name, index));
+		}
+		else
+		{
+			copy[(name, index)] = value;
+		}
+
 		return new HeadsetSnapshot(copy, Session);
 	}
 

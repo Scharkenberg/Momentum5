@@ -9,12 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="xunit.v3" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <Using Include="Xunit" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Momentum5.Core\Momentum5.Core.csproj" />
     <ProjectReference Include="..\Momentum5.Protocol\Momentum5.Protocol.csproj" />
+    <ProjectReference Include="..\Momentum5.Client\Momentum5.Client.csproj" />
+    <ProjectReference Include="..\Momentum5.Simulation\Momentum5.Simulation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

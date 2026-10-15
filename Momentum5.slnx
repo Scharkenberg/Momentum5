@@ -8,8 +8,12 @@
     <Platform Solution="*|x64" Project="x64" />
     <Deploy />
   </Project>
+  <Project Path="Momentum5.Cli/Momentum5.Cli.csproj" />
+  <Project Path="Momentum5.Client/Momentum5.Client.csproj" />
   <Project Path="Momentum5.Core/Momentum5.Core.csproj" />
   <Project Path="Momentum5.Protocol/Momentum5.Protocol.csproj" />
+  <Project Path="Momentum5.Simulation/Momentum5.Simulation.csproj" />
   <Project Path="Momentum5.Transport.Ble/Momentum5.Transport.Ble.csproj" />
+  <Project Path="Momentum5.Transport.Rfcomm/Momentum5.Transport.Rfcomm.csproj" />
   <Project Path="Momentum5.Tests/Momentum5.Tests.csproj" />
 </Solution>

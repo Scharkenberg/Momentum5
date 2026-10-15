@@ -235,6 +235,7 @@ public sealed partial class MainWindow : Window, INotifyPropertyChanged
 
 		if (!TryGetTargetAddress(out var address, out var sourceLabel, out var errorText))
 		{
+			errorText ??= "Invalid address.";
 			TargetAddressText = errorText;
 			AddNote(errorText);
 			return;

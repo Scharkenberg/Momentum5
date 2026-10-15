@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <NoWarn>$(NoWarn);CS8305;CA1001;CA1859</NoWarn>
     <OutputType>WinExe</OutputType>
     <TargetFramework>$(WinTfm)</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
