@@ -1,0 +1,2152 @@
+[
+ {
+  "ts": 1792023137954,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1201",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 12 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023137985,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1301",
+  "payload": "00 06 00 15 00 05",
+  "frame": "FF 03 00 06 04 95 13 01 00 06 00 15 00 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023137993,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0001",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138032,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0101",
+  "payload": "00 09 01 08 06 1B 01 03 02 10 02 04 04 02 01 0A 04 14 01 0B 02 0C 02 0D 02 00 05",
+  "frame": "FF 03 00 1B 04 95 01 01 00 09 01 08 06 1B 01 03 02 10 02 04 04 02 01 0A 04 14 01 0B 02 0C 02 0D 02 00 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138036,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "0001",
+  "payload": "",
+  "frame": "FF 03 00 00 00 1D 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138062,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0101",
+  "payload": "00 0D 01 0C 01 06 02 04 02 07 01 00 05",
+  "frame": "FF 03 00 0D 00 1D 01 01 00 0D 01 0C 01 06 02 04 02 07 01 00 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138064,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "01",
+  "frame": "FF 03 00 01 00 1D 00 0C 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138076,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "01 00 00 00 30",
+  "frame": "FF 03 00 05 00 1D 01 0C 01 00 00 00 30",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138076,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "02",
+  "frame": "FF 03 00 01 00 1D 00 0C 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138088,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "02 00 00 00 30",
+  "frame": "FF 03 00 05 00 1D 01 0C 02 00 00 00 30",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138539,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "03",
+  "frame": "FF 03 00 01 00 1D 00 0C 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138582,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "03 00 00 00 FE",
+  "frame": "FF 03 00 05 00 1D 01 0C 03 00 00 00 FE",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138584,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "04",
+  "frame": "FF 03 00 01 00 1D 00 0C 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138595,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "04 00 00 00 FE",
+  "frame": "FF 03 00 05 00 1D 01 0C 04 00 00 00 FE",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138597,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "05",
+  "frame": "FF 03 00 01 00 1D 00 0C 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138606,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "05 00 00 00 01",
+  "frame": "FF 03 00 05 00 1D 01 0C 05 00 00 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138608,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "06",
+  "frame": "FF 03 00 01 00 1D 00 0C 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138619,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "06 00 00 00 01",
+  "frame": "FF 03 00 05 00 1D 01 0C 06 00 00 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138621,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "07",
+  "frame": "FF 03 00 01 00 1D 00 0C 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138638,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "07 00 00 00 03",
+  "frame": "FF 03 00 05 00 1D 01 0C 07 00 00 00 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138663,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "08",
+  "frame": "FF 03 00 01 00 1D 00 0C 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138684,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "08 00 00 00 25",
+  "frame": "FF 03 00 05 00 1D 01 0C 08 00 00 00 25",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138686,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000D",
+  "payload": "07 00 00 00 04",
+  "frame": "FF 03 00 05 00 1D 00 0D 07 00 00 00 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138696,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010D",
+  "payload": "07 00 00 00 04",
+  "frame": "FF 04 00 05 00 1D 01 0D 07 00 00 00 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138699,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "01",
+  "frame": "FF 03 00 01 00 1D 00 0C 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138708,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "01 00 00 00 30",
+  "frame": "FF 04 00 05 00 1D 01 0C 01 00 00 00 30",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138710,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "02",
+  "frame": "FF 03 00 01 00 1D 00 0C 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138744,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "02 00 00 00 30",
+  "frame": "FF 04 00 05 00 1D 01 0C 02 00 00 00 30",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138751,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "03",
+  "frame": "FF 03 00 01 00 1D 00 0C 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138762,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "03 00 00 06 40",
+  "frame": "FF 04 00 05 00 1D 01 0C 03 00 00 06 40",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138767,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "04",
+  "frame": "FF 03 00 01 00 1D 00 0C 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138784,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "04 00 00 03 52",
+  "frame": "FF 04 00 05 00 1D 01 0C 04 00 00 03 52",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138790,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "05",
+  "frame": "FF 03 00 01 00 1D 00 0C 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138802,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "05 00 00 00 01",
+  "frame": "FF 04 00 05 00 1D 01 0C 05 00 00 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138804,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "06",
+  "frame": "FF 03 00 01 00 1D 00 0C 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138815,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "06 00 00 00 01",
+  "frame": "FF 04 00 05 00 1D 01 0C 06 00 00 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138816,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "07",
+  "frame": "FF 03 00 01 00 1D 00 0C 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138826,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "07 00 00 00 04",
+  "frame": "FF 04 00 05 00 1D 01 0C 07 00 00 00 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138828,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "000C",
+  "payload": "08",
+  "frame": "FF 03 00 01 00 1D 00 0C 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138837,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "010C",
+  "payload": "08 00 00 00 25",
+  "frame": "FF 04 00 05 00 1D 01 0C 08 00 00 00 25",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138850,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "04",
+  "frame": "FF 03 00 01 04 95 00 07 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138862,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138862,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "0007",
+  "payload": "07",
+  "frame": "FF 03 00 01 00 1D 00 07 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138863,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0898",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 08 98 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138868,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "089D",
+  "payload": "F9",
+  "frame": "FF 04 00 01 04 95 08 9D F9",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138872,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0882",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 08 82 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138875,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0886",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 08 86 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138877,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0880",
+  "payload": "FF",
+  "frame": "FF 04 00 01 04 95 08 80 FF",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138880,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "089A",
+  "payload": "00 00 00 00",
+  "frame": "FF 04 00 04 04 95 08 9A 00 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138883,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "089E",
+  "payload": "FF 00 00 00 00",
+  "frame": "FF 04 00 05 04 95 08 9E FF 00 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138888,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0896",
+  "payload": "00 42",
+  "frame": "FF 04 00 02 04 95 08 96 00 42",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138889,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0884",
+  "payload": "00 01",
+  "frame": "FF 04 00 02 04 95 08 84 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138894,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 00 1D 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138895,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "0A",
+  "frame": "FF 03 00 01 04 95 00 07 0A",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138901,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0E80",
+  "payload": "01",
+  "frame": "FF 04 00 01 00 1D 0E 80 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138910,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138912,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "03",
+  "frame": "FF 03 00 01 04 95 00 07 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138920,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138921,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "02",
+  "frame": "FF 03 00 01 04 95 00 07 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138933,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0682",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 06 82 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138934,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0683",
+  "payload": "1E",
+  "frame": "FF 04 00 01 04 95 06 83 1E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138937,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138937,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "0007",
+  "payload": "06",
+  "frame": "FF 03 00 01 00 1D 00 07 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138944,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0482",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 04 82 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138948,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 00 1D 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138949,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "0D",
+  "frame": "FF 03 00 01 04 95 00 07 0D",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138958,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138959,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "0C",
+  "frame": "FF 03 00 01 04 95 00 07 0C",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138960,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1A85",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 1A 85 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138963,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1A81",
+  "payload": "01 01 03 00 02 00",
+  "frame": "FF 04 00 06 04 95 1A 81 01 01 03 00 02 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138967,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1A83",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 1A 83 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138980,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138982,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1885",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 18 85 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138982,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "1B",
+  "frame": "FF 03 00 01 04 95 00 07 1B",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138991,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138994,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3683",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 36 83 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138995,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3681",
+  "payload": "01 00",
+  "frame": "FF 04 00 02 04 95 36 81 01 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138997,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3685",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 36 85 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023138998,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "0B",
+  "frame": "FF 03 00 01 04 95 00 07 0B",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139008,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139010,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1687",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 16 87 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139013,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1202",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 12 02",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139026,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1302",
+  "payload": "06 15 05 00 00 00",
+  "frame": "FF 04 00 06 04 95 13 02 06 15 05 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139028,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0601",
+  "payload": "00",
+  "frame": "FF 03 00 01 04 95 06 01 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139039,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0701",
+  "payload": "00 03 84",
+  "frame": "FF 04 00 03 04 95 07 01 00 03 84",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139040,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "060B",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 0B",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139053,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "070B",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 07 0B 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139054,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0815",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 15",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139068,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0915",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 09 15 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139070,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0802",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139082,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0902",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 09 02 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139083,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0806",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139093,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0906",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 09 06 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139095,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "080D",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 0D",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139115,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "090D",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 09 0D 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139116,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0406",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139126,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0506",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 05 06 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139128,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "080B",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 0B",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139151,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "090B",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 09 0B 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139153,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2802",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 28 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139162,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2902",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 0F 04 95 29 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139168,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0402",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139189,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0502",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 05 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139190,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0402",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139208,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0502",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 05 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139209,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0800",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139219,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0900",
+  "payload": "FF",
+  "frame": "FF 04 00 01 04 95 09 00 FF",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139221,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1409",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 14 09",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139229,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1509",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 15 09 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139230,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0603",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139250,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0703",
+  "payload": "1E",
+  "frame": "FF 04 00 01 04 95 07 03 1E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139253,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0401",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139269,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0501",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 05 01 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139271,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1805",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 18 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139280,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1905",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 19 05 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139282,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "3606",
+  "payload": "01 00 00 00 00 00 00",
+  "frame": "FF 03 00 07 04 95 36 06 01 00 00 00 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139295,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3706",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 37 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139296,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1607",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 16 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139305,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1707",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 17 07 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139306,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1200",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 12 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139322,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1300",
+  "payload": "00 04 00 00",
+  "frame": "FF 04 00 04 04 95 13 00 00 04 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139323,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0807",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139339,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0907",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 09 07 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139340,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0408",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139350,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0508",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 05 08 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139351,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2803",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 28 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139370,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2983",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 29 83 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139372,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "081A",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 1A",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139382,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "091A",
+  "payload": "00 00 00 00",
+  "frame": "FF 04 00 04 04 95 09 1A 00 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139383,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1413",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 14 13",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139413,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1513",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 04 00 06 04 95 15 13 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139414,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0602",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139433,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0702",
+  "payload": "00 00",
+  "frame": "FF 04 00 02 04 95 07 02 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139434,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "080E",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 0E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139451,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "090E",
+  "payload": "00 3D 00 8A",
+  "frame": "FF 04 00 04 04 95 09 0E 00 3D 00 8A",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139453,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1A05",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 1A 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139462,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1B05",
+  "payload": "01",
+  "frame": "FF 04 00 01 04 95 1B 05 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139465,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "3603",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 36 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139474,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3703",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 37 03 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139477,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2601",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 26 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139485,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2781",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 27 81 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139489,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "0003",
+  "payload": "",
+  "frame": "FF 03 00 00 00 1D 00 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139506,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0103",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 10 00 1D 01 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139508,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0808",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139534,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0908",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 09 08 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139535,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "081E",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 1E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139549,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "091E",
+  "payload": "FF 00 00 00 00",
+  "frame": "FF 04 00 05 04 95 09 1E FF 00 00 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139552,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140D",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 14 0D",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139575,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150D",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 1F 04 95 15 0D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139579,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "060E",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 0E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139602,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "070E",
+  "payload": "06 FF",
+  "frame": "FF 04 00 02 04 95 07 0E 06 FF",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139608,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0402",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139634,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0502",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 05 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139636,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1A01",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 1A 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139645,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1B01",
+  "payload": "01 01 03 00 02 00",
+  "frame": "FF 04 00 06 04 95 1B 01 01 01 03 00 02 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139648,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "3605",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 36 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139660,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3705",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 37 05 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139663,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "081D",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 1D",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139677,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "091D",
+  "payload": "F9",
+  "frame": "FF 04 00 01 04 95 09 1D F9",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139678,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1000",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 10 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139689,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1100",
+  "payload": "08 C4 3C 00 00",
+  "frame": "FF 04 00 05 04 95 11 00 08 C4 3C 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139690,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140E",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 03 00 06 04 95 14 0E 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139701,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150E",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 1A 04 95 15 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139702,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1A03",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 1A 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139712,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1B03",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 1B 03 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139713,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "3601",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 36 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139722,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "3701",
+  "payload": "01 0F",
+  "frame": "FF 04 00 02 04 95 37 01 01 0F",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139723,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1206",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 12 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139732,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1306",
+  "payload": "4D 35 41 45 42 54 20 42 6C 61 63 6B 00",
+  "frame": "FF 04 00 0D 04 95 13 06 4D 35 41 45 42 54 20 42 6C 61 63 6B 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139732,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1206",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 12 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139742,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1306",
+  "payload": "4D 35 41 45 42 54 20 42 6C 61 63 6B 00",
+  "frame": "FF 04 00 0D 04 95 13 06 4D 35 41 45 42 54 20 42 6C 61 63 6B 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139743,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0804",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 08 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139760,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0904",
+  "payload": "00 01",
+  "frame": "FF 04 00 02 04 95 09 04 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139761,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140E",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 03 00 06 04 95 14 0E 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139772,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150E",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 19 04 95 15 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139774,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1801",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 18 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139786,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1901",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 19 01 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139787,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1009",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 10 09",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139797,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1109",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 11 09 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139798,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140E",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 03 00 06 04 95 14 0E 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139808,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150E",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 12 04 95 15 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139809,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "00",
+  "frame": "FF 03 00 01 04 95 10 02 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139820,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "F8",
+  "frame": "FF 04 00 01 04 95 11 02 F8",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139821,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140E",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 03 00 06 04 95 14 0E 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139831,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150E",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 22 04 95 15 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139832,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "01",
+  "frame": "FF 03 00 01 04 95 10 02 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139843,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 11 02 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139844,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "140E",
+  "payload": "00 00 00 00 00 00",
+  "frame": "FF 03 00 06 04 95 14 0E 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139857,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "150E",
+  "payload": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 0F 04 95 15 0E 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139858,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "02",
+  "frame": "FF 03 00 01 04 95 10 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139867,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "08",
+  "frame": "FF 04 00 01 04 95 11 02 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139868,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1414",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 14 14",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139879,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1514",
+  "payload": "00 00 00 00 00 00 00",
+  "frame": "FF 04 00 07 04 95 15 14 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023139880,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "03",
+  "frame": "FF 03 00 01 04 95 10 02 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139909,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "12",
+  "frame": "FF 04 00 01 04 95 11 02 12",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139910,
+  "dir": "tx",
+  "vendor": "001D",
+  "cmd": "0E10",
+  "payload": "",
+  "frame": "FF 03 00 00 00 1D 0E 10",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139930,
+  "dir": "rx",
+  "vendor": "001D",
+  "cmd": "0F10",
+  "payload": "01",
+  "frame": "FF 04 00 01 00 1D 0F 10 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139931,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "04",
+  "frame": "FF 03 00 01 04 95 10 02 04",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139946,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "14",
+  "frame": "FF 04 00 01 04 95 11 02 14",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139947,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "05",
+  "frame": "FF 03 00 01 04 95 10 02 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139966,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "10",
+  "frame": "FF 04 00 01 04 95 11 02 10",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139968,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "06",
+  "frame": "FF 03 00 01 04 95 10 02 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139985,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "08",
+  "frame": "FF 04 00 01 04 95 11 02 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023139986,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "1002",
+  "payload": "07",
+  "frame": "FF 03 00 01 04 95 10 02 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140030,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1102",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 11 02 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140031,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "08",
+  "frame": "FF 03 00 01 04 95 00 07 08",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140042,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140043,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2001",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 20 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140043,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1082",
+  "payload": "F8 00 08 12 14 10 08 00",
+  "frame": "FF 04 00 08 04 95 10 82 F8 00 08 12 14 10 08 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140044,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1089",
+  "payload": "00",
+  "frame": "FF 04 00 01 04 95 10 89 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140045,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1091",
+  "payload": "00 00 00 01 00 00 02 00 00 03 00 00 04 00 00 05 00 00 06 00 00 07 00 00",
+  "frame": "FF 04 00 18 04 95 10 91 00 00 00 01 00 00 02 00 00 03 00 00 04 00 00 05 00 00 06 00 00 07 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140050,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "108B",
+  "payload": "00 00 5A 01 01 45 02 05 DC 03 09 C4 04 11 94 05 1F 40 06 32 C8 07 3E 80",
+  "frame": "FF 04 00 18 04 95 10 8B 00 00 5A 01 01 45 02 05 DC 03 09 C4 04 11 94 05 1F 40 06 32 C8 07 3E 80",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140054,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "108D",
+  "payload": "00 08 00 01 0B 5C 02 0B 5C 03 0B 5C 04 0B 5C 05 0B 5C 06 0B 5C 07 0B 5C",
+  "frame": "FF 04 00 18 04 95 10 8D 00 08 00 01 0B 5C 02 0B 5C 03 0B 5C 04 0B 5C 05 0B 5C 06 0B 5C 07 0B 5C",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140058,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1093",
+  "payload": "00 00",
+  "frame": "FF 04 00 02 04 95 10 93 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140059,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "108F",
+  "payload": "00 0E 01 0E 02 0E 03 0E 04 0E 05 0E 06 0E 07 0E",
+  "frame": "FF 04 00 10 04 95 10 8F 00 0E 01 0E 02 0E 03 0E 04 0E 05 0E 06 0E 07 0E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140065,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2101",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 21 01 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140066,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2003",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 20 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140077,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2103",
+  "payload": "C2 74 C9 EF C2 75 C6 51 C2 85 C7 C0 C2 98 64 F8 C2 98 E3 28 C2 A3 C7 C0",
+  "frame": "FF 04 00 18 04 95 21 03 C2 74 C9 EF C2 75 C6 51 C2 85 C7 C0 C2 98 64 F8 C2 98 E3 28 C2 A3 C7 C0",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140078,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2005",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 20 05",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140089,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2105",
+  "payload": "3F A9 11 7D 3F 94 88 BE 3F 80 00 00 3F 80 00 00 3F 80 00 00 3F 80 00 00",
+  "frame": "FF 04 00 18 04 95 21 05 3F A9 11 7D 3F 94 88 BE 3F 80 00 00 3F 80 00 00 3F 80 00 00 3F 80 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140090,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "2007",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 20 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140108,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2107",
+  "payload": "3F 81 47 AE 00 00 00 00 40 38 51 EC 07 06",
+  "frame": "FF 04 00 0E 04 95 21 07 3F 81 47 AE 00 00 00 00 40 38 51 EC 07 06",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140109,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0007",
+  "payload": "10",
+  "frame": "FF 03 00 01 04 95 00 07 10",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140119,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0107",
+  "payload": "",
+  "frame": "FF 04 00 00 04 95 01 07",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023140120,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "2081",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 20 81 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023141176,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1491",
+  "payload": "00 00 00 00 00 00 00 00",
+  "frame": "FF 04 00 08 04 95 14 91 00 00 00 00 00 00 00 00",
+  "action": "anc anti-wind",
+  "redacted": true
+ },
+ {
+  "ts": 1792023141177,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "1484",
+  "payload": "00 01",
+  "frame": "FF 04 00 02 04 95 14 84 00 01",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182490,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0603",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 03",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182510,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0703",
+  "payload": "1E",
+  "frame": "FF 04 00 01 04 95 07 03 1E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182588,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0402",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182659,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0502",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 05 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182669,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0402",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 04 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182692,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0502",
+  "payload": "02",
+  "frame": "FF 04 00 01 04 95 05 02 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182699,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "0602",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 02",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182726,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "0702",
+  "payload": "00 00",
+  "frame": "FF 04 00 02 04 95 07 02 00 00",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182727,
+  "dir": "tx",
+  "vendor": "0495",
+  "cmd": "060E",
+  "payload": "",
+  "frame": "FF 03 00 00 04 95 06 0E",
+  "action": "anc anti-wind"
+ },
+ {
+  "ts": 1792023182746,
+  "dir": "rx",
+  "vendor": "0495",
+  "cmd": "070E",
+  "payload": "06 FF",
+  "frame": "FF 04 00 02 04 95 07 0E 06 FF",
+  "action": "anc anti-wind"
+ }
+]

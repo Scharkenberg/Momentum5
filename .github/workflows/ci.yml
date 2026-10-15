@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 11.0.x
+          dotnet-quality: preview
+
+      - run: dotnet --info
+
+      - name: Build
+        run: dotnet build Momentum5.slnx -c Release -p:Platform=x64
+
+      - name: Test (Microsoft.Testing.Platform)
+        run: dotnet test --solution Momentum5.slnx -c Release -p:Platform=x64 --no-build --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+          if-no-files-found: ignore
+
+      - name: Format check (non-blocking)
+        continue-on-error: true
+        run: dotnet format Momentum5.slnx --verify-no-changes --no-restore

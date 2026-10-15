@@ -2,15 +2,14 @@
   <Configurations>
     <Platform Name="ARM64" />
     <Platform Name="x64" />
-    <Platform Name="x86" />
   </Configurations>
   <Project Path="Momentum5.App/Momentum5.App.csproj">
     <Platform Solution="*|ARM64" Project="ARM64" />
     <Platform Solution="*|x64" Project="x64" />
-    <Platform Solution="*|x86" Project="x86" />
     <Deploy />
   </Project>
   <Project Path="Momentum5.Core/Momentum5.Core.csproj" />
   <Project Path="Momentum5.Protocol/Momentum5.Protocol.csproj" />
-  <Project Path="Momentum5.Transport.Bluetooth/Momentum5.Transport.Bluetooth.csproj" />
+  <Project Path="Momentum5.Transport.Ble/Momentum5.Transport.Ble.csproj" />
+  <Project Path="Momentum5.Tests/Momentum5.Tests.csproj" />
 </Solution>

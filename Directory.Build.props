@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<WinTfm>net11.0-windows10.0.26100.0</WinTfm>
+	</PropertyGroup>
+</Project>

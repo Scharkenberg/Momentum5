@@ -1,5 +1,5 @@
-﻿// Momentum5.Transport.Bluetooth/BleGattTransport.cs
-using Momentum5.Core.Transport;
+﻿// Momentum5.Transport.Ble/GattExplorer.cs
+using Momentum5.Core.Gatt;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Advertisement;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
@@ -8,9 +8,9 @@ using Windows.Storage.Streams;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Momentum5.Transport.Bluetooth;
+namespace Momentum5.Transport.Ble;
 
-public sealed class BleGattTransport : IBluetoothTransport
+public sealed class GattExplorer : IGattExplorer
 {
 	private BluetoothLEDevice? _device;
 	private readonly Dictionary<(Guid Service, Guid Characteristic), GattCharacteristic> _subscriptions = new();

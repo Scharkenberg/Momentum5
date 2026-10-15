@@ -1,0 +1,65 @@
+# tier|id|instruction.   Start state: Custom, slider full ANC, anti-wind on, EQ "Mids & Voices", bass off, immersive off, controls on, on-head/smart-pause/auto-answer on, APO never, comfort calls on, tone only, battery protection on, multipoint on.
+1|nc-adaptive|My Device > Noise control: tap "Adaptive"
+1|nc-custom|tap "Custom"
+1|nc-off|tap "Off"
+1|nc-custom-b|tap "Custom"
+1|slider-mid|drag the ANC/Transparency slider to the exact middle
+1|slider-anc100|drag fully LEFT (ANC 100%)
+1|slider-transp100|drag fully RIGHT (Transparency)
+1|slider-anc100-b|drag back fully LEFT
+1|antiwind-off|Anti-wind toggle (on the card) OFF
+1|antiwind-on|Anti-wind toggle ON
+1|aw-max|open Noise control page (card arrow): Anti-wind settings > "Max"
+1|aw-auto|tap "Auto"
+1|pc-transp-on|Phone calls toggle ON
+1|pc-level-low|its slider: Low
+1|pc-level-2|next notch
+1|pc-level-3|next notch
+1|pc-level-high|High
+1|pc-transp-off|Phone calls toggle OFF
+1|autopause-on|Auto-pause ON
+1|autopause-off|Auto-pause OFF   (then go back)
+1|imm-on|My Device > Immersive audio: tap "On"
+1|imm-open|open the Immersive audio page (card arrow)
+1|head-off|Head Tracking OFF
+1|head-on|Head Tracking ON
+1|imm-off|Immersive audio toggle OFF   (then go back)
+1|controls-off|My Device > Controls: master toggle OFF
+1|controls-on|master toggle ON
+1|comfortcalls-off|Device Settings tab: Comfort Calls OFF
+1|comfortcalls-on|Comfort Calls ON
+1|batprot-off|Battery Protection Mode OFF
+1|batprot-on|Battery Protection Mode ON
+1|prompts-off|Tone & voice prompts > "Off"
+1|prompts-tone|"Tone only"
+1|prompts-vol-min|prompt Volume slider fully left
+1|prompts-vol-max|fully right
+1|prompts-vol-mid|back to about the middle   (then go back)
+2|eq-neutral|My Device > My sound: tap preset "Neutral"
+2|eq-rock|tap "Rock"
+2|eq-mids|tap "Mids & Voices"
+2|bass-on|Bass boost ON
+2|bass-off|Bass boost OFF
+2|eq-band-up|open "Mids & Voices" editor: drag ONE band up a little
+2|eq-band-restore|drag the same band back
+2|onhead-off|Device Settings: On-head Detection OFF
+2|onhead-on|On-head Detection ON
+2|smartpause-off|Smart Pause OFF
+2|smartpause-on|Smart Pause ON
+2|autoanswer-off|Auto-Answer Calls OFF
+2|autoanswer-on|Auto-Answer Calls ON
+2|apo-15|Auto Power Off > 15 min
+2|apo-never|Auto Power Off > Never
+2|ctl-playback|My Device > Controls: open "Playback" tab (view only)
+2|ctl-calls|open "Calls" tab (view only)
+2|mp-off|Connection Management: Multipoint OFF
+2|mp-on|Multipoint ON
+2|conn-iphone-off|tap "iPhone von Joe" (disconnect)
+2|conn-iphone-on|tap it again (connect)
+2|rename-x|Name headphones: append a "2", save
+2|rename-back|rename back
+2|product-info|Device Settings > Product info (open only)
+2|firmware-open|Firmware (open only, DO NOT update)
+2|codec-open|Codec (open only)
+3|hires-off|Audio mode priority: Hi-Res OFF (headphones may restart: confirm, reconnect, reopen app)
+3|hires-on|Hi-Res ON (same)

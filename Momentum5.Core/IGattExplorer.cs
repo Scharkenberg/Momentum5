@@ -1,7 +1,7 @@
-﻿// Momentum5.Core/IBluetoothTransport.cs
+﻿// Momentum5.Core/IGattExplorer.cs
 using System.Collections.ObjectModel;
 
-namespace Momentum5.Core.Transport;
+namespace Momentum5.Core.Gatt;
 
 public sealed record BleDeviceSnapshot(
 	string DeviceId,
@@ -24,7 +24,7 @@ public sealed record GattServiceSnapshot(
 	Guid ServiceUuid,
 	IReadOnlyList<GattCharacteristicSnapshot> Characteristics);
 
-public interface IBluetoothTransport : IAsyncDisposable
+public interface IGattExplorer : IAsyncDisposable
 {
 	event EventHandler<string>? LogLine;
 	event EventHandler<BleDeviceSnapshot>? DeviceSeen;

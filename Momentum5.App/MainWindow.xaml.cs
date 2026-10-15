@@ -14,8 +14,8 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Momentum5.Core.Transport;
-using Momentum5.Transport.Bluetooth;
+using Momentum5.Core.Gatt;
+using Momentum5.Transport.Ble;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
@@ -25,7 +25,7 @@ namespace Momentum5.App;
 
 public sealed partial class MainWindow : Window, INotifyPropertyChanged
 {
-	private readonly IBluetoothTransport _transport = new BleGattTransport();
+	private readonly IGattExplorer _transport = new GattExplorer();
 
 	private bool _isBusy;
 	private string _statusText = "Ready";
@@ -347,7 +347,7 @@ public sealed partial class MainWindow : Window, INotifyPropertyChanged
 		{
 			Devices.Clear();
 
-			var devices = await BleGattTransport.GetConnectedKnownLeDevicesAsync();
+			var devices = await GattExplorer.GetConnectedKnownLeDevicesAsync();
 
 			foreach (var d in devices)
 			{
